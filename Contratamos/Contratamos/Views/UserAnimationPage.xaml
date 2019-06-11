@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:animations="clr-namespace:Contratamos.Animations"
+                 x:Class="Contratamos.Views.UserAnimationPage">
+
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Frame BackgroundColor="White" CornerRadius="8">
+            <StackLayout Spacing="20">
+                <Grid WidthRequest="250" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Source="Reloj.png" WidthRequest="50" HeightRequest="80" Grid.Column="0" Margin="7,5,7,5"/>
+
+                    <Grid Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label HorizontalOptions="Center" TextColor="Black" Text="{Binding NombreAplicacion}" FontSize="13" Grid.Row="0"/>
+                        <Label HorizontalOptions="Center" TextColor="Black" Text="Un momento por favor..." FontSize="13" Grid.Row="1"/>
+                    </Grid>
+                </Grid>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+
+</pages:PopupPage>

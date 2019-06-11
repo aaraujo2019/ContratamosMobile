@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Contratamos.Views.PagPrincipal"
+             Title= "{Binding NombreAplicacion}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="menuSalir" Order="Primary" Text="salir" Priority="1" Clicked="menuSalir_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <Frame CornerRadius="3" Margin="5,5,5,5" OutlineColor="Black" HasShadow="True">
+
+            <Grid x:Name="grdControles">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout x:Name="stMensaje" Grid.Row="0" Margin="0,20,0,10"/>
+
+                <Grid x:Name="grdTomaInformacion" Grid.Row="1" HorizontalOptions="Center">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="260"/>
+                        <ColumnDefinition Width="80"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" Text="Búsqueda como profesional?" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                        <Label.FontSize>
+                            <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                        </Label.FontSize>
+                    </Label>
+
+                    <Switch x:Name="EsProfesional" Grid.Column="1" Grid.Row="0" Toggled="Switch_Toggled" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                    <Entry Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" x:Name="txtBusqueda" TextColor="Black" Placeholder="Ingrese su preferencia para la busqueda"
+                           PlaceholderColor="Silver" HorizontalTextAlignment="Start" VerticalOptions="Center" WidthRequest="200" IsVisible="{Binding IsVisibleTexto}">
+                        <Entry.FontSize>
+                            <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                        </Entry.FontSize>
+                    </Entry>
+
+                    <Picker Title="Seleccione ..." ItemsSource="{Binding ListaDeProfesiones}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" 
+                            ItemDisplayBinding="{Binding Descripcion}" SelectedItem="{Binding SelectedProfesion}" IsVisible="{Binding IsVisiblePicker}">
+                        <Picker.FontSize>
+                            <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                        </Picker.FontSize>
+                    </Picker>
+
+                    <Button x:Name="btnBuscar" WidthRequest="200" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="buscar" BackgroundColor="#0072BD" 
+                    TextColor="White" VerticalOptions="Center" HorizontalOptions="Center">
+                        <Button.FontSize>
+                            <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="20"/>
+                        </Button.FontSize>
+                    </Button>
+
+                    <StackLayout  x:Name="pnlPlantillas" BackgroundColor="#f2f2f2" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" HorizontalOptions="Center" Grid.RowSpan="2"/>
+
+                </Grid>
+            </Grid>
+
+        </Frame>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             x:Class="Contratamos.Views.OfertasEmpleos">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+
+                <Frame CornerRadius="3" Margin="5,5,5,5" OutlineColor="Black" HasShadow="True">
+                    <Grid x:Name="grdControles">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackLayout x:Name="stMensaje" Grid.Row="0" Margin="0,20,0,10"/>
+
+                        <Grid x:Name="grdTomaInformacion" Grid.Row="1" HorizontalOptions="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="80"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Column="0" Grid.Row="0" Text="Título" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Label.FontSize>
+                            </Label>
+
+                            <Entry Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" x:Name="txtTitulo" TextColor="Black" Placeholder="Título Oferta."
+                               PlaceholderColor="Silver" HorizontalTextAlignment="Start" VerticalOptions="Center" WidthRequest="200" >
+                                <Entry.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                                   Phone="15"                  
+                                   Tablet="25"/>
+                                </Entry.FontSize>
+                            </Entry>
+
+
+                            <Label Grid.Column="0" Grid.Row="1" Text="Profesión" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Label.FontSize>
+                            </Label>
+
+                            <Picker Title="Seleccione ..." ItemsSource="{Binding ListaDeProfesiones}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" 
+                            ItemDisplayBinding="{Binding Descripcion}" SelectedItem="{Binding SelectedProfesion}" IsVisible="{Binding IsVisiblePicker}">
+                                <Picker.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Picker.FontSize>
+                            </Picker>
+
+
+                            <Label Grid.Column="0" Grid.Row="2" Text="Fecha Inicio" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Label.FontSize>
+                            </Label>
+
+                            <DatePicker Grid.Column="1" Grid.Row="2" x:Name="fechaInicio" Grid.ColumnSpan="2">
+                                <DatePicker.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </DatePicker.FontSize>
+                            </DatePicker>
+
+                            
+                            <Label Grid.Column="0" Grid.Row="3" Text="Fecha Fin" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Label.FontSize>
+                            </Label>
+
+                            <DatePicker Grid.Column="1" Grid.Row="3" x:Name="fechaFin" Grid.ColumnSpan="2">
+                                <DatePicker.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </DatePicker.FontSize>
+                            </DatePicker>
+
+
+                            <Label Grid.Column="0" Grid.Row="4" Text="Salario" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Label.FontSize>
+                            </Label>
+
+
+                            <Entry Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" x:Name="txtSalario" TextColor="Black" Placeholder="Salario"
+                               PlaceholderColor="Silver" HorizontalTextAlignment="Start" VerticalOptions="Center" WidthRequest="200" >
+                                <Entry.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                                   Phone="15"                  
+                                   Tablet="25"/>
+                                </Entry.FontSize>
+                            </Entry>
+
+                            <Label Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Text="Detalles de la oferta" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Label.FontSize>
+                            </Label>
+
+                            <Editor Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3" Text="Descripción detallada de la oferta." 
+                                    BackgroundColor="#c2c8d1" HeightRequest="300" WidthRequest="400">
+                                <Editor.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Editor.FontSize>
+                            </Editor>
+
+
+                        </Grid>
+
+                    </Grid>
+                </Frame>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

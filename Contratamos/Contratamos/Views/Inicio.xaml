@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Contratamos.Views.Inicio"
+             NavigationPage.HasBackButton="False"
+             Title="Contratamos" BackgroundColor="White">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="mnuSalir" Order="Primary" Text="salir" Priority="1" Clicked="mnuSalir_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid x:Name="LayoutRoot" BackgroundColor="White">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <StackLayout Grid.Row="0" HorizontalOptions="CenterAndExpand" Margin="0,180,0,0">
+            <StackLayout BackgroundColor="White" Opacity="0.8">
+                <Label Text="{Binding Titulo}" FontSize="Large" HorizontalOptions="CenterAndExpand"/>
+                <Image Source="drawable/ImgPagPPal.png" Aspect="AspectFit" Margin="2,2,2,2" HeightRequest="250" WidthRequest="250"/>
+            </StackLayout>
+        </StackLayout>
+
+        <StackLayout Grid.Row="1" HorizontalOptions="Center" Margin="0,300,0,0">
+            <Button Text="Entrar" BackgroundColor="#0072BD" Margin="2,10,2,10"
+                            TextColor="White" FontSize="18" Command="{Binding InicioCommand}"/>
+        </StackLayout>
+
+    </Grid>
+</ContentPage>
