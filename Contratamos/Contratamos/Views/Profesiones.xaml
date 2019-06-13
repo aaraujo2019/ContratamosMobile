@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Contratamos.Views.Profesiones">
+
+    <ContentPage.Content>
+        <Frame CornerRadius="3" Margin="5,5,5,5" OutlineColor="Black" HasShadow="True">
+            <Grid x:Name="LayoutRoot" BackgroundColor="White">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="0" HorizontalOptions="CenterAndExpand" Margin="0,100,0,0">
+                    <StackLayout BackgroundColor="White" Opacity="0.8">
+                        <Label Text="Profesiones" FontSize="Large" HorizontalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <Grid x:Name="grdTomaInformacion" Grid.Row="1" HorizontalOptions="Center">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="80"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" Text="Profesión" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                        <Label.FontSize>
+                            <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                        </Label.FontSize>
+                    </Label>
+
+                    <Entry Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" x:Name="txtDescripcionProfesion" TextColor="Black" Placeholder="Descripción Profesión."
+                               PlaceholderColor="Silver" HorizontalTextAlignment="Start" VerticalOptions="Center" WidthRequest="200" >
+                        <Entry.FontSize>
+                            <OnIdiom x:TypeArguments="x:Double"                     
+                                   Phone="15"                  
+                                   Tablet="25"/>
+                        </Entry.FontSize>
+                    </Entry>
+
+                    <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="0,100,0,0">
+                        <Button Text="Guardar" BackgroundColor="#0072BD" Margin="2,30,2,10"
+                            TextColor="White" FontSize="18" Command="{Binding InicioCommand}"/>
+                    </StackLayout>
+
+                </Grid>
+            </Grid>
+        </Frame>
+    </ContentPage.Content>
+
+
+</ContentPage>

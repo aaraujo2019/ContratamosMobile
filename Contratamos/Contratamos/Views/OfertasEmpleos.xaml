@@ -15,6 +15,13 @@
                         </Grid.RowDefinitions>
 
                         <StackLayout x:Name="stMensaje" Grid.Row="0" Margin="0,20,0,10"/>
+                        <Label Grid.Row="0" Text="Oferta de Empléo" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                            <Label.FontSize>
+                                <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                            </Label.FontSize>
+                        </Label>
 
                         <Grid x:Name="grdTomaInformacion" Grid.Row="1" HorizontalOptions="Center">
                             <Grid.ColumnDefinitions>
@@ -23,6 +30,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -129,7 +137,7 @@
                             </Label>
 
                             <Editor Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3" Text="Descripción detallada de la oferta." 
-                                    BackgroundColor="#c2c8d1" HeightRequest="300" WidthRequest="400">
+                                    BackgroundColor="#c2c8d1" HeightRequest="250" WidthRequest="450">
                                 <Editor.FontSize>
                                     <OnIdiom x:TypeArguments="x:Double"                     
                                Phone="15"                  
@@ -137,6 +145,10 @@
                                 </Editor.FontSize>
                             </Editor>
 
+                            <StackLayout Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="0,0,0,0">
+                                <Button Text="Guardar" BackgroundColor="#0072BD" Margin="2,30,2,10"
+                            TextColor="White" FontSize="18" Command="{Binding InicioCommand}"/>
+                            </StackLayout>
 
                         </Grid>
 
