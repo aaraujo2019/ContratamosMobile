@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Contratamos.Behaviors"
+             x:Class="Contratamos.Views.vUsuarios">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <Frame CornerRadius="3" Margin="5,5,5,5" OutlineColor="Black" HasShadow="True">
+                    <Grid x:Name="grdControles">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackLayout x:Name="stMensaje" Grid.Row="0" Margin="0,20,0,10"/>
+                        <Label Grid.Row="0" Text="Usuarios" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                            <Label.FontSize>
+                                <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                            </Label.FontSize>
+                        </Label>
+
+                        <Grid x:Name="grdTomaInformacion" Grid.Row="1" HorizontalOptions="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="80"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Column="0" Grid.Row="0" Text="Nombres" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Label.FontSize>
+                            </Label>
+
+                            <Entry Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" x:Name="txtNombre" TextColor="Black" Placeholder="Nombres"
+                               PlaceholderColor="Silver" HorizontalTextAlignment="Start" VerticalOptions="Center" WidthRequest="200" >
+                                <Entry.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                                   Phone="15"                  
+                                   Tablet="25"/>
+                                </Entry.FontSize>
+                            </Entry>
+
+                            <!--++++++++++++++++++++++++++-->
+
+                            <Label Grid.Column="0" Grid.Row="1" Text="Apellidos" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Label.FontSize>
+                            </Label>
+
+                            <Entry Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" x:Name="txtApellido" TextColor="Black" Placeholder="Apellidos"
+                               PlaceholderColor="Silver" HorizontalTextAlignment="Start" VerticalOptions="Center" WidthRequest="200" >
+                                <Entry.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                                   Phone="15"                  
+                                   Tablet="25"/>
+                                </Entry.FontSize>
+                            </Entry>
+
+
+                            <!--++++++++++++++++++++++++++++++++-->
+
+                            <Label Grid.Column="0" Grid.Row="2" Text="Usuario" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Label.FontSize>
+                            </Label>
+
+                            <Entry Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="txtUsuario" TextColor="Black" Placeholder="Usuario"
+                               PlaceholderColor="Silver" HorizontalTextAlignment="Start" VerticalOptions="Center" WidthRequest="200" >
+                                <Entry.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                                   Phone="15"                  
+                                   Tablet="25"/>
+                                </Entry.FontSize>
+                            </Entry>
+
+                            <!--++++++++++++++++++++++++++++++++-->
+
+                            <Label Grid.Column="0" Grid.Row="3" Text="Contraseña" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Label.FontSize>
+                            </Label>
+
+                            <Entry Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" x:Name="txtContrasena" TextColor="Black" Placeholder="Contraseña"
+                               PlaceholderColor="Silver" HorizontalTextAlignment="Start" VerticalOptions="Center" WidthRequest="200" IsPassword="True">
+                                <Entry.Behaviors>
+                                    <local:PasswordValidatorBehavior/>
+                                </Entry.Behaviors>
+                                <Entry.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                                   Phone="15"                  
+                                   Tablet="25"/>
+                                </Entry.FontSize>
+                            </Entry>
+
+                            <!--++++++++++++++++++++++++++++++++-->
+
+                            <Label Grid.Column="0" Grid.Row="4" Text="Email" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Label.FontSize>
+                            </Label>
+
+                            <Entry Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" x:Name="txtEmail" TextColor="Black" Placeholder="Email"
+                               PlaceholderColor="Silver" HorizontalTextAlignment="Start" VerticalOptions="Center" WidthRequest="200" Keyboard="Email">
+                                <Entry.Behaviors>
+                                    <local:EmailValidatorBehavior/>
+                                </Entry.Behaviors>
+                                <Entry.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                                   Phone="15"                  
+                                   Tablet="25"/>
+                                </Entry.FontSize>
+                            </Entry>
+
+                            <!--+++++++++++++++++++-->
+
+                            <Label Grid.Column="0" Grid.Row="5" Text="Tipo Usuario" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Label.FontSize>
+                            </Label>
+
+                            <Picker Title="Seleccione ..." ItemsSource="{Binding TipoUsuario}" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" 
+                            ItemDisplayBinding="{Binding Descripcion}" SelectedItem="{Binding SelectedProfesion}" IsVisible="{Binding IsVisiblePicker}">
+                                <Picker.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Picker.FontSize>
+                            </Picker>
+
+
+                            <!--+++++++++++++++++++++++++-->
+
+                            <Entry Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3" x:Name="txtRuta" TextColor="Black" PlaceholderColor="Silver" 
+                           HorizontalTextAlignment="Start" VerticalOptions="Center" WidthRequest="150" Placeholder="HV/CV .PDF" IsEnabled="False">
+                                <Entry.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Entry.FontSize>
+                            </Entry>
+
+                            <StackLayout Grid.Column="2" Grid.Row="6" HorizontalOptions="Center" Margin="0,0,0,0">
+                                <Button Text="..." BackgroundColor="#0072BD" Margin="1,10,0,1"
+                            TextColor="White" FontSize="18" Command="{Binding BuscarCommand}"/>
+                            </StackLayout>
+
+                            <!--++++++++++++++++++++++++++++++++-->
+
+
+
+                            <StackLayout Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" HorizontalOptions="Center" Margin="0,0,0,0">
+                                <Button Text="Guardar" BackgroundColor="#0072BD" Margin="2,30,2,10"
+                            TextColor="White" FontSize="18" Command="{Binding GuardarCommand}"/>
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="2" Grid.Row="7" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="0,0,0,0">
+                                <Button Text="Editar" BackgroundColor="#0072BD" Margin="2,30,2,10"
+                            TextColor="White" FontSize="18" Command="{Binding EditarCommand}"/>
+                            </StackLayout>
+
+                        </Grid>
+
+                    </Grid>
+
+                </Frame>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

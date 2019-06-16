@@ -147,7 +147,7 @@
 
                             <StackLayout Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="0,0,0,0">
                                 <Button Text="Guardar" BackgroundColor="#0072BD" Margin="2,30,2,10"
-                            TextColor="White" FontSize="18" Command="{Binding InicioCommand}"/>
+                            TextColor="White" FontSize="18" Command="{Binding GuardarCommand}"/>
                             </StackLayout>
 
                         </Grid>

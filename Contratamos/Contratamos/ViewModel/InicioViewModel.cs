@@ -61,7 +61,7 @@ namespace Contratamos.ViewModel
                 //    Detail = new NavigationPage(new PagPrincipal()),
                 //};
 
-                App.Current.MainPage = new NavigationPage(new OfertasEmpleos());
+                App.Current.MainPage = new NavigationPage(new vUsuarios());
 
                 Application.Current.MainPage = MasterDetailPage;
                 PopupNavigation.PopAsync();
