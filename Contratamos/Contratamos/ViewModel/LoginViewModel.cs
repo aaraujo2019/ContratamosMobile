@@ -8,6 +8,7 @@ using System;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Contratamos.Clases;
+using Contratamos.Menu;
 
 namespace Contratamos.ViewModel
 {
@@ -51,6 +52,7 @@ namespace Contratamos.ViewModel
         #endregion
 
         clsPrincipal clsPrincipal = new clsPrincipal();
+        private MasterDetailPage MasterDetailPage;
 
         public LoginViewModel()
         {
@@ -89,15 +91,22 @@ namespace Contratamos.ViewModel
         private async void ValidarUsuario(string _usuario, string _pass)
         {
             string _Respuesta = string.Empty;
-            var restorno = clsPrincipal.ValidarUsuario(_usuario, _pass);
+            modGeneral.clsUsuario = clsPrincipal.ValidarUsuario(_usuario, _pass);
 
-            if (restorno != null)
+            if (modGeneral.clsUsuario != null)
             {
                 modGeneral.usuario = _usuario;
-                await Navigation.PushAsync(new PagPrincipal());
+                //await Navigation.PushAsync(new PagPrincipal());
+                MasterDetailPage = new MasterDetailPage
+                {
+                    Master = new MenuPage(),
+                    Detail = new NavigationPage(new PagPrincipal()),
+                };
+                Application.Current.MainPage = MasterDetailPage;
             }
             else
             {
+                _Respuesta = "El usuario no existe.";
                 await App.Current.MainPage.DisplayAlert("Login", _Respuesta, "Ok");
             }
         }

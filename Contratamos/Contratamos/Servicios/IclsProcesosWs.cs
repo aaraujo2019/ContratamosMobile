@@ -7,7 +7,9 @@ namespace Contratamos.Servicios
     public interface IclsProcesosWs
     {
         List<Models.Profesiones> CargarProfesiones();
-
+        List<Models.TipoUsuario> CargarTipoUsuario();
         DataSet CargarOfertas();
+        DataSet ConsultarTipoUsuarioId(int idTipoUsuario);
+
     }
 }

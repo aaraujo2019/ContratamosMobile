@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Contratamos.Generales;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Contratamos.Menu
@@ -6,16 +7,21 @@ namespace Contratamos.Menu
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MenuPage : ContentPage
 	{
-		public MenuPage ()
+        public MenuPage ()
 		{
 			InitializeComponent ();
             string TituloMenu = string.Empty;
+
+            if (modGeneral.clsUsuario != null)
+                TituloMenu = string.Concat(modGeneral.clsUsuario.Nombre, " ", modGeneral.clsUsuario.Apellido);
+            else TituloMenu = "Iniciar Sesión";
 
             Content = new StackLayout
             {
                 Padding = Device.Idiom == TargetIdiom.Tablet ? new Thickness(30, 50, 20, 20) : new Thickness(20, 50, 10, 10),
                 Children = {
-                    new MainLink("Inicio Sesión", 1),
+                    new MainLink("Inicio", 3),
+                    new MainLink(TituloMenu, 1),
                     new MainLink("Crear Usuario", 2)
                 }
             };

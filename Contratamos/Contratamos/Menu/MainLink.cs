@@ -1,6 +1,4 @@
-﻿using Android;
-using Android.App;
-using Contratamos.Clases;
+﻿using Contratamos.Generales;
 using Contratamos.Views;
 using System;
 using Xamarin.Forms;
@@ -9,7 +7,8 @@ namespace Contratamos.Menu
 {
     public class MainLink : Checkbox
     {
-        int OpcionSeleccionada = 0;
+        private int OpcionSeleccionada = 0;
+        private MasterDetailPage MasterDetailPage;
 
         public MainLink(string name, int opcion)
         {
@@ -28,26 +27,42 @@ namespace Contratamos.Menu
         {
             switch (opcion)
             {
-                case 2:
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(clsConfiguracion.mContext);
-                    AlertDialog alert = dialog.Create();
+                case 3:
+                    MasterDetailPage = null;
+                    MasterDetailPage = new MasterDetailPage
+                    {
+                        Master = new MenuPage(),
+                        Detail = new NavigationPage(new PagPrincipal()),
+                    };
 
-                    alert.SetTitle("Contratámos");
-                    alert.SetMessage("¿Desea cambiar el Modo de ejecución de la aplicación, está seguro.?");
-                    alert.SetIcon(Resource.Drawable.IcDialogAlert);
-                    alert.SetButton("OK", async (c, ev) =>
+                    App.Current.MainPage = MasterDetailPage;
+                    break;
+                case 2:
+                    MasterDetailPage = null;
+                    MasterDetailPage = new MasterDetailPage
                     {
-                        
-                    });
-                    alert.SetButton2("Cancelar", (s, ed) =>
-                    {
-                        return;
-                    });
-                    alert.Show();
+                        Master = new MenuPage(),
+                        Detail = new NavigationPage(new vUsuarios()),
+                    };
+
+                    App.Current.MainPage = MasterDetailPage;
                     break;
                 case 1:
 
-                        App.Current.MainPage = new NavigationPage(new Login());
+                    if (modGeneral.clsUsuario != null)
+                        App.Current.MainPage = new NavigationPage(new vUsuarios());
+                    else
+                    {
+                        MasterDetailPage = null;
+                        MasterDetailPage = new MasterDetailPage
+                        {
+                            Master = new MenuPage(),
+                            Detail = new NavigationPage(new Login()),
+                        };
+
+                        App.Current.MainPage = MasterDetailPage;
+                    }
+
                     break;
             }
         }

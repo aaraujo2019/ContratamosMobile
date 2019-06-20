@@ -92,12 +92,12 @@ namespace Contratamos.Views
             }
         }
 
-        private void ListarOfertas(List<Ofertas> listaProfesiones)
+        private void ListarOfertas(List<Ofertas> listaOferta)
         {
             try
             {
                 List<KeyValuePair<int, string>> listaElementos = new List<KeyValuePair<int, string>>();
-                foreach (var item in listaProfesiones)
+                foreach (var item in listaOferta)
                 {
                     listaElementos.Add(new KeyValuePair<int, string>(item.IdOferta, item.Titulo));
                 }

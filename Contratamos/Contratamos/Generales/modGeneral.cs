@@ -1,4 +1,5 @@
 ﻿using Android.Content;
+using Contratamos.Models;
 using System;
 using System.Text.RegularExpressions;
 
@@ -8,6 +9,7 @@ namespace Contratamos.Generales
     {
         public static string IDEstacion { set; get; }
         public static string usuario { set; get; }
+        public static Usuarios clsUsuario { set; get; }
 
         public static string RutaArchivos { set; get; }
         public static string ArchivoGenerado { set; get; }

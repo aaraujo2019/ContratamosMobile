@@ -32,10 +32,12 @@ namespace Contratamos.Droid.Conexion
                     estadoSesion = true;
                     usuarios.Usuario = datosFiltros.Tables[0].Rows[0][3].ToString();
                     usuarios.Nombre = datosFiltros.Tables[0].Rows[0][1].ToString();
-                    usuarios.Apellido = string.Concat(datosFiltros.Tables[0].Rows[0][1].ToString(), " ", datosFiltros.Tables[0].Rows[0][2].ToString());
+                    usuarios.Apellido = datosFiltros.Tables[0].Rows[0][2].ToString();
                     usuarios.IdUsuario = System.Convert.ToInt32(datosFiltros.Tables[0].Rows[0][0].ToString());
-                    usuarios.IdTipoUsuario = System.Convert.ToInt32(datosFiltros.Tables[0].Rows[0][5].ToString());
-       
+                    usuarios.Email = datosFiltros.Tables[0].Rows[0][5].ToString();
+                    usuarios.IdTipoUsuario = System.Convert.ToInt32(datosFiltros.Tables[0].Rows[0][6].ToString());
+                    usuarios.ArchivoCv = datosFiltros.Tables[0].Rows[0][7].ToString();
+
                     return usuarios;
                 }
                 else
@@ -129,6 +131,39 @@ namespace Contratamos.Droid.Conexion
             }
         }
 
+        public static List<Models.TipoUsuario> CargarTipoUsuario()
+        {
+            try
+            {
+                SqlConnection cn = getConnection();
+                DataSet datosFiltros = new DataSet();
+                List<Models.TipoUsuario> listaTipoUsuarios = new List<Models.TipoUsuario>();
+                cn.Open();
+
+                using (SqlCommand cmdConsulta = new SqlCommand("select * from [decasa_admin].[TipoUsuario]", cn))
+                {
+                    using (SqlDataReader reader = cmdConsulta.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Models.TipoUsuario tipoUsuario = new Models.TipoUsuario()
+                            {
+                                IdTipoUsuario = reader.GetInt32(0),
+                                Descripcion = reader.GetString(1)
+                            };
+
+                            listaTipoUsuarios.Add(tipoUsuario);
+                        }
+                    }
+                }
+                return listaTipoUsuarios;
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
+        }
+
         public static DataSet CargarOfertas()
         {
             try
@@ -140,6 +175,32 @@ namespace Contratamos.Droid.Conexion
                 using (SqlCommand cmdConsulta = new SqlCommand("decasa_admin.CargarOfertas", cn))
                 {
                     cmdConsulta.CommandType = CommandType.StoredProcedure;
+                    SqlDataAdapter daConsulta = new SqlDataAdapter(cmdConsulta);
+                    daConsulta.Fill(datosFiltros);
+
+                    return datosFiltros;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
+        }
+
+
+        public static DataSet ConsultarTipoUsuarioId(int idTipoUsuario)
+        {
+            try
+            {
+                SqlConnection cn = getConnection();
+                DataSet datosFiltros = new DataSet();
+                cn.Open();
+
+                using (SqlCommand cmdConsulta = new SqlCommand("decasa_admin.ConsultarTipoUsuarioId", cn))
+                {
+                    cmdConsulta.CommandType = CommandType.StoredProcedure;
+                    cmdConsulta.Parameters.Clear();
+                    cmdConsulta.Parameters.AddWithValue("@pIdTipoUsuario", idTipoUsuario);
                     SqlDataAdapter daConsulta = new SqlDataAdapter(cmdConsulta);
                     daConsulta.Fill(datosFiltros);
 

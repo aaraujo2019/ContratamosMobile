@@ -1,5 +1,6 @@
 ﻿using Contratamos.Clases;
 using Contratamos.Generales;
+using Contratamos.ViewModel;
 using System;
 using System.IO;
 
@@ -11,9 +12,17 @@ namespace Contratamos.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class vUsuarios : ContentPage
     {
+        private vUsuarioViewModel vusuarioViewModel;
+        public vUsuarioViewModel vUsuarioViewModel { get => vusuarioViewModel; set => vusuarioViewModel = value; }
+
         public vUsuarios()
         {
             InitializeComponent();
+            BindingContext = vUsuarioViewModel = new vUsuarioViewModel();
+            vUsuarioViewModel.Navigation = this.Navigation;
+
+            if (modGeneral.clsUsuario != null)
+                cmbTipoUsuario.SelectedIndex = modGeneral.clsUsuario.IdTipoUsuario;
         }
 
         public async void OpenFolderDialogAsync()

@@ -18,10 +18,19 @@ namespace Contratamos.Servicios
             return objProcesosWs.CargarProfesiones();
         }
 
+        public List<Models.TipoUsuario> CargarTipoUsuario()
+        {
+            return objProcesosWs.CargarTipoUsuario();
+        }
+
         public DataSet CargarOfertas()
         {
             return objProcesosWs.CargarOfertas();
         }
-
+        
+        public DataSet ConsultarTipoUsuarioId(int idTipoUsuario)
+        {
+            return objProcesosWs.ConsultarTipoUsuarioId(idTipoUsuario);
+        }
     }
 }

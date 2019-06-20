@@ -54,14 +54,14 @@ namespace Contratamos.ViewModel
             try
             {
                 Title = string.Empty;
-                //await Navigation.PushPopupAsync(new UserAnimationPage());
-                //MasterDetailPage = new MasterDetailPage
-                //{
-                //    Master = new MenuPage(),
-                //    Detail = new NavigationPage(new PagPrincipal()),
-                //};
+                await Navigation.PushPopupAsync(new UserAnimationPage());
+                MasterDetailPage = new MasterDetailPage
+                {
+                    Master = new MenuPage(),
+                    Detail = new NavigationPage(new PagPrincipal()),
+                };
 
-                App.Current.MainPage = new NavigationPage(new vUsuarios());
+                //App.Current.MainPage = new NavigationPage(new vUsuarios());
 
                 Application.Current.MainPage = MasterDetailPage;
                 PopupNavigation.PopAsync();

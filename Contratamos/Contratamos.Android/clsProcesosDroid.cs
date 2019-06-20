@@ -24,11 +24,35 @@ namespace Contratamos.Droid
             }
         }
 
+        public List<Models.TipoUsuario> CargarTipoUsuario()
+        {
+            try
+            {
+                return Conexion.BaseDatos.CargarTipoUsuario();
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
         public DataSet CargarOfertas()
         {
             try
             {
                 return Conexion.BaseDatos.CargarOfertas();
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataSet ConsultarTipoUsuarioId(int idTipoUsuario)
+        {
+            try
+            {
+                return Conexion.BaseDatos.ConsultarTipoUsuarioId(idTipoUsuario);
             }
             catch (System.Exception)
             {
