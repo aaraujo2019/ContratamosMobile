@@ -1,7 +1,11 @@
 ﻿using Contratamos.Clases;
 using Contratamos.Generales;
+using Contratamos.Menu;
 using Contratamos.Models;
 using Contratamos.Servicios;
+using Contratamos.Views;
+using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +19,7 @@ namespace Contratamos.ViewModel
         public INavigation Navigation { get; set; }
         public ICommand GuardarCommand { get; set; }
         clsPrincipal clsPrincipal = new clsPrincipal();
+        private MasterDetailPage MasterDetailPage;
 
         private Usuarios _user = new Usuarios();
         public Usuarios User
@@ -76,7 +81,7 @@ namespace Contratamos.ViewModel
         }
 
 
-        private void Guardar()
+        private async void Guardar()
         {
             if (User.IdUsuario != 0)
             {
@@ -87,8 +92,18 @@ namespace Contratamos.ViewModel
             {
                 clsPrincipal.GuardarUsuario(User);
                 App.Current.MainPage.DisplayAlert("Contratámos", "El usuario se ha ingresado con exito.", "Ok");
-                User = new Usuarios();
             }
+
+            await Navigation.PushPopupAsync(new UserAnimationPage());
+            MasterDetailPage = new MasterDetailPage
+            {
+                Master = new MenuPage(),
+                Detail = new NavigationPage(new PagPrincipal()),
+            };
+
+            Application.Current.MainPage = MasterDetailPage;
+            PopupNavigation.PopAsync();
         }
+
     }
 }
