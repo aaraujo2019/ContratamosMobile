@@ -27,7 +27,7 @@ namespace Contratamos.Views
 
         public async void OpenFolderDialogAsync()
         {
-            SimpleFileDialog fileDialog = new SimpleFileDialog(clsConfiguracion.mContext, SimpleFileDialog.FileSelectionMode.FileOpen);
+            SimpleFileDialog fileDialog = new SimpleFileDialog(clsConfiguracion.mContext, SimpleFileDialog.FileSelectionMode.FileOpenRoot);
             string path = await fileDialog.GetFileOrDirectoryAsync(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath);
 
             if (!String.IsNullOrEmpty(path))
@@ -83,8 +83,20 @@ namespace Contratamos.Views
             }
         }
 
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            txtNombre.Text = string.Empty;
+            txtApellido.Text = string.Empty;
+            txtContrasena.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtRuta.Text = string.Empty;
+            txtUsuario.Text = string.Empty;
+            cmbTipoUsuario.SelectedIndex = -1;
+        }
 
-
-
+        private void BtnBuscar_Clicked(object sender, EventArgs e)
+        {
+            OpenFolderDialogAsync();
+        }
     }
 }

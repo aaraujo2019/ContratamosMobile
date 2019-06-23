@@ -1,6 +1,8 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
+using Contratamos.Models;
+using System;
 
 namespace Contratamos.Droid.Conexion
 {
@@ -23,20 +25,22 @@ namespace Contratamos.Droid.Conexion
 
                 param[0].Value = pUsuario;
                 param[1].Value = pClave;
-
+                                
                 DataSet datosFiltros = new DataSet();
                 datosFiltros = ValidarUsuarioLogin("ValidarUsuario", param);
 
                 if (datosFiltros.Tables[0].Rows.Count > 0)
                 {
                     estadoSesion = true;
+                    byte[] archivoByte = new byte[datosFiltros.Tables[0].Rows[0][7].ToString() == string.Empty ? 0 : datosFiltros.Tables[0].Rows[0][7].ToString().Length];
                     usuarios.Usuario = datosFiltros.Tables[0].Rows[0][3].ToString();
                     usuarios.Nombre = datosFiltros.Tables[0].Rows[0][1].ToString();
                     usuarios.Apellido = datosFiltros.Tables[0].Rows[0][2].ToString();
                     usuarios.IdUsuario = System.Convert.ToInt32(datosFiltros.Tables[0].Rows[0][0].ToString());
                     usuarios.Email = datosFiltros.Tables[0].Rows[0][5].ToString();
                     usuarios.IdTipoUsuario = System.Convert.ToInt32(datosFiltros.Tables[0].Rows[0][6].ToString());
-                    usuarios.ArchivoCv = datosFiltros.Tables[0].Rows[0][7].ToString();
+                    usuarios.ArchivoCv = archivoByte;
+                    usuarios.Contraseña = datosFiltros.Tables[0].Rows[0][4].ToString();
 
                     return usuarios;
                 }
@@ -210,6 +214,63 @@ namespace Contratamos.Droid.Conexion
             catch (System.Exception ex)
             {
                 return null;
+            }
+        }
+
+        public static void GuardarUsuario(Usuarios usuario)
+        {
+            try
+            {
+                byte[] archivoByte = new byte[usuario.ArchivoCv == null ? 0 : usuario.ArchivoCv.Length];
+                SqlConnection cn = getConnection();
+                cn.Open();
+
+                using (SqlCommand cmdConsulta = new SqlCommand("decasa_admin.InsertarUsuario", cn))
+                {
+                    cmdConsulta.CommandType = CommandType.StoredProcedure;
+                    cmdConsulta.Parameters.Clear();
+                    cmdConsulta.Parameters.AddWithValue("@pNombre", usuario.Nombre);
+                    cmdConsulta.Parameters.AddWithValue("@pApellido", usuario.Apellido);
+                    cmdConsulta.Parameters.AddWithValue("@pUsuario", usuario.Usuario);
+                    cmdConsulta.Parameters.AddWithValue("@pContraseña", usuario.Contraseña);
+                    cmdConsulta.Parameters.AddWithValue("@pEmail", usuario.Email);
+                    cmdConsulta.Parameters.AddWithValue("@pIdTipoUsuario", usuario.IdTipoUsuario);
+                    cmdConsulta.Parameters.AddWithValue("@pArchivoCv", archivoByte);
+                    cmdConsulta.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public static void ActualizarUsuario(Usuarios usuario)
+        {
+            try
+            {
+                byte[] archivoByte = new byte[usuario.ArchivoCv == null ? 0 : usuario.ArchivoCv.Length];
+                SqlConnection cn = getConnection();
+                cn.Open();
+
+                using (SqlCommand cmdConsulta = new SqlCommand("decasa_admin.ActualizarUsuario", cn))
+                {
+                    cmdConsulta.CommandType = CommandType.StoredProcedure;
+                    cmdConsulta.Parameters.Clear();
+                    cmdConsulta.Parameters.AddWithValue("@pNombre", usuario.Nombre);
+                    cmdConsulta.Parameters.AddWithValue("@pApellido", usuario.Apellido);
+                    cmdConsulta.Parameters.AddWithValue("@pUsuario", usuario.Usuario);
+                    cmdConsulta.Parameters.AddWithValue("@pContraseña", usuario.Contraseña);
+                    cmdConsulta.Parameters.AddWithValue("@pEmail", usuario.Email);
+                    cmdConsulta.Parameters.AddWithValue("@pIdTipoUsuario", usuario.IdTipoUsuario);
+                    cmdConsulta.Parameters.AddWithValue("@pArchivoCv", archivoByte);
+                    cmdConsulta.Parameters.AddWithValue("@pIdUsuario", usuario.IdUsuario);
+                    cmdConsulta.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
 

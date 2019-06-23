@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Contratamos.Models;
 
 namespace Contratamos.Servicios
 {
     public interface IclsUsuariosWs
     {
-        Models.Usuarios Login(string Usuario, string Pass);
+        Usuarios Login(string Usuario, string Pass);
+        void GuardarUsuario(Usuarios usuarios);
+        void ActualizarUsuario(Usuarios usuarios);
     }
 }

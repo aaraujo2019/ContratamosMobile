@@ -1,25 +1,49 @@
-﻿using Contratamos.Servicios;
+﻿using Contratamos.Models;
+using Contratamos.Servicios;
 using System;
-using System.Collections.Generic;
 
 namespace Contratamos.Droid
 {
     public class clsUsuariosDroid : IclsUsuariosWs
     {
-        Models.Usuarios usuarios;
+        Usuarios usuarios;
 
         public clsUsuariosDroid()
         {
-            usuarios = new Models.Usuarios();
+            usuarios = new Usuarios();
         }
 
-        public Models.Usuarios Login(string Usuario, string Pass)
+        public Usuarios Login(string Usuario, string Pass)
         {
             try
             {
                return Conexion.BaseDatos.ValidarUsuarioConexionAcceso(Usuario, Pass);
             }
             catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public void GuardarUsuario(Usuarios usuarios)
+        {
+            try
+            {
+                Conexion.BaseDatos.GuardarUsuario(usuarios);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void ActualizarUsuario(Usuarios usuarios)
+        {
+            try
+            {
+                Conexion.BaseDatos.ActualizarUsuario(usuarios);
+            }
+            catch (Exception)
             {
                 throw;
             }

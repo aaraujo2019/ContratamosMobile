@@ -1,4 +1,6 @@
 ﻿
+using Contratamos.Models;
+
 namespace Contratamos.Servicios
 {
     public class clsUsuariosWs
@@ -10,9 +12,19 @@ namespace Contratamos.Servicios
             objUsuario = usuariosWs;
         }
 
-        public Models.Usuarios Login(string Usuario, string Pass)
+        public Usuarios Login(string Usuario, string Pass)
         {
             return objUsuario.Login(Usuario, Pass);
+        }
+
+        public void GuardarUsuario(Usuarios usuarios)
+        {
+            objUsuario.GuardarUsuario(usuarios);
+        }
+
+        public void ActualizarUsuario(Usuarios usuarios)
+        {
+            objUsuario.ActualizarUsuario(usuarios);
         }
 
     }

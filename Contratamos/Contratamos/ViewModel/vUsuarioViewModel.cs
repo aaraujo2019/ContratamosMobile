@@ -1,8 +1,11 @@
-﻿using Contratamos.Generales;
+﻿using Contratamos.Clases;
+using Contratamos.Generales;
 using Contratamos.Models;
 using Contratamos.Servicios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Contratamos.ViewModel
@@ -10,6 +13,8 @@ namespace Contratamos.ViewModel
     public class vUsuarioViewModel : ViewModelBase
     {
         public INavigation Navigation { get; set; }
+        public ICommand GuardarCommand { get; set; }
+        clsPrincipal clsPrincipal = new clsPrincipal();
 
         private Usuarios _user = new Usuarios();
         public Usuarios User
@@ -62,11 +67,28 @@ namespace Contratamos.ViewModel
         public vUsuarioViewModel()
         {
             Titulo = modGeneral.NombreAplicacion;
+            GuardarCommand = new Command(Guardar);
 
             if (modGeneral.clsUsuario != null)
                 User = modGeneral.clsUsuario;
             
             ListaTipoUsuarios = TipoUsuarioServices.ObtenerTipoUsuario().OrderBy(p => p.IdTipoUsuario).ToList();
+        }
+
+
+        private void Guardar()
+        {
+            if (User.IdUsuario != 0)
+            {
+                clsPrincipal.ActualizarUsuario(User);
+                App.Current.MainPage.DisplayAlert("Contratámos", "Usuario actualizado con exito.", "Ok");
+            }
+            else
+            {
+                clsPrincipal.GuardarUsuario(User);
+                App.Current.MainPage.DisplayAlert("Contratámos", "El usuario se ha ingresado con exito.", "Ok");
+                User = new Usuarios();
+            }
         }
     }
 }
