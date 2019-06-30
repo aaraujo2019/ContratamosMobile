@@ -38,6 +38,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <Label Grid.Column="0" Grid.Row="0" Text="Título" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
@@ -67,7 +68,8 @@
                             </Label>
 
                             <Picker Title="Seleccione ..." ItemsSource="{Binding ListaDeProfesiones}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" 
-                            ItemDisplayBinding="{Binding Descripcion}" SelectedItem="{Binding SelectedProfesion}" IsVisible="{Binding IsVisiblePicker}">
+                            ItemDisplayBinding="{Binding Descripcion}" SelectedItem="{Binding SelectedProfesion}" IsVisible="{Binding IsVisiblePicker}"
+                                    x:Name="cmbProfesiones">
                                 <Picker.FontSize>
                                     <OnIdiom x:TypeArguments="x:Double"                     
                                Phone="15"                  
@@ -128,7 +130,7 @@
                                 </Entry.FontSize>
                             </Entry>
 
-                            <Label Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Text="Detalles de la oferta" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                            <Label Grid.Column="0" Grid.Row="5" Text="Estado Oferta" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
                                 <Label.FontSize>
                                     <OnIdiom x:TypeArguments="x:Double"                     
                                Phone="15"                  
@@ -136,8 +138,35 @@
                                 </Label.FontSize>
                             </Label>
 
-                            <Editor Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3" Text="Descripción detallada de la oferta." 
-                                    BackgroundColor="#c2c8d1" HeightRequest="250" WidthRequest="450">
+                            <Grid Grid.Column="1" Grid.Row="5">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <Switch x:Name="swEstadoOferta" Grid.Column="0" Toggled="Switch_Toggled" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                                <Label Grid.Column="1" Text="---" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" x:Name="lblEstado">
+                                    <Label.FontSize>
+                                        <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                    </Label.FontSize>
+                                </Label>
+                            </Grid>
+                           
+
+                            <Label Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Text="Detalles de la oferta" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Label.FontSize>
+                            </Label>
+
+                            <Editor Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="3" Text="Descripción detallada de la oferta." 
+                                    BackgroundColor="#c2c8d1" HeightRequest="250" WidthRequest="450" x:Name="txtDetalleOferta">
                                 <Editor.FontSize>
                                     <OnIdiom x:TypeArguments="x:Double"                     
                                Phone="15"                  
@@ -145,9 +174,14 @@
                                 </Editor.FontSize>
                             </Editor>
 
-                            <StackLayout Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="0,0,0,0">
+                            <StackLayout x:Name="btnGuardar" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" HorizontalOptions="Center" Margin="0,0,0,0">
                                 <Button Text="Guardar" BackgroundColor="#0072BD" Margin="2,30,2,10"
-                            TextColor="White" FontSize="18" Command="{Binding GuardarCommand}"/>
+                            TextColor="White" FontSize="18" Clicked="btnGuardar_Clicked"/>
+                            </StackLayout>
+
+                            <StackLayout x:Name="btnNuevo" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" HorizontalOptions="Center" Margin="0,0,0,0">
+                                <Button Text="Buscar" BackgroundColor="#0072BD" Margin="2,30,2,10"
+                            TextColor="White" FontSize="18" Clicked="btnNuevo_Clicked"/>
                             </StackLayout>
 
                         </Grid>

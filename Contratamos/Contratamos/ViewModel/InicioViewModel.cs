@@ -68,8 +68,7 @@ namespace Contratamos.ViewModel
             }
             catch (Exception ex)
             {
-                //clsConfiguracion.Main(ex.Message, "Login(); LoginPageViewModel", "alvaro");
-                await App.Current.MainPage.DisplayAlert("Contratámos", "Ha ocurrido un problema al validar el usuario por favor verifíque que todo esté correcto.", "Ok");
+                await App.Current.MainPage.DisplayAlert("Contratámos - Inicio", "Ha ocurrido un problema al validar el usuario por favor verifíque que todo esté correcto.", "Ok");
             }
         }
     }

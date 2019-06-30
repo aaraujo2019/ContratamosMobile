@@ -14,6 +14,7 @@ namespace Contratamos.Views
     {
         private vUsuarioViewModel vusuarioViewModel;
         public vUsuarioViewModel vUsuarioViewModel { get => vusuarioViewModel; set => vusuarioViewModel = value; }
+        public modGeneral modGeneral = new modGeneral();
 
         public vUsuarios()
         {
@@ -27,7 +28,7 @@ namespace Contratamos.Views
 
         public async void OpenFolderDialogAsync()
         {
-            SimpleFileDialog fileDialog = new SimpleFileDialog(clsConfiguracion.mContext, SimpleFileDialog.FileSelectionMode.FileOpenRoot);
+            SimpleFileDialog fileDialog = new SimpleFileDialog(clsConfiguracion.mContext, SimpleFileDialog.FileSelectionMode.FileOpen);
             string path = await fileDialog.GetFileOrDirectoryAsync(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath);
 
             if (!String.IsNullOrEmpty(path))
@@ -54,24 +55,9 @@ namespace Contratamos.Views
                     string pdfBase64 = Convert.ToBase64String(pdfBytes);
 
                     modGeneral.RutaArchivos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    _sNombreTemporal = Path.Combine(modGeneral.RutaArchivos, string.Concat(Guid.NewGuid().ToString("N"), ".pdf"));
+                    _sNombreTemporal = Path.Combine(modGeneral.RutaArchivos, string.Concat(txtNombre.Text,"-",txtApellido.Text,"-",DateTime.Now.ToShortDateString(), ".pdf"));
 
-                    modGeneral.ArchivoGenerado = _sNombreTemporal;
-                    if (File.Exists(_sNombreTemporal))
-                    {
-                        File.Delete(_sNombreTemporal);
-                    }
-
-                    try
-                    {
-                        File.WriteAllBytes(_sNombreTemporal, Convert.FromBase64String(pdfBase64));
-                    }
-                    catch (Exception)
-                    {
-                        _sNombreTemporal = modGeneral.ArchivoOriginal;
-                    }
-
-                    //modGeneral.strDocumentoBase64 = pdfBase64;
+                    vUsuarioViewModel.User.ArchivoCv = modGeneral.ConvertirDocBinary(_sNombreTemporal);
                 }
 
                 //VisualizarPdf(Archivo, _sNombreTemporal);

@@ -1,4 +1,5 @@
 ﻿
+using Contratamos.Models;
 using System.Collections.Generic;
 using System.Data;
 
@@ -18,7 +19,7 @@ namespace Contratamos.Servicios
             return objProcesosWs.CargarProfesiones();
         }
 
-        public List<Models.TipoUsuario> CargarTipoUsuario()
+        public List<TipoUsuario> CargarTipoUsuario()
         {
             return objProcesosWs.CargarTipoUsuario();
         }
@@ -31,6 +32,11 @@ namespace Contratamos.Servicios
         public DataSet ConsultarTipoUsuarioId(int idTipoUsuario)
         {
             return objProcesosWs.ConsultarTipoUsuarioId(idTipoUsuario);
+        }
+
+        public void InsetarOfertaEmpleo(Ofertas ofertas)
+        {
+            objProcesosWs.InsetarOfertaEmpleo(ofertas);
         }
     }
 }

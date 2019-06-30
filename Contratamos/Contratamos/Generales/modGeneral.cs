@@ -1,6 +1,7 @@
 ﻿using Android.Content;
 using Contratamos.Models;
 using System;
+using System.IO;
 using System.Text.RegularExpressions;
 
 namespace Contratamos.Generales
@@ -50,5 +51,29 @@ namespace Contratamos.Generales
                 App.Current.MainPage.DisplayAlert("BioFirma Mobile", "Ha ocurrido un problema al enviar el mail.", "Ok");
             }
         }
+
+        public byte[] ConvertirDocBinary(string path)
+        {
+            try
+            {
+                byte[] buffer = null;
+                int longitud;
+                var PathfileName = string.Empty;
+                PathfileName = path;
+                using (var fs = new FileStream(PathfileName, FileMode.Open, FileAccess.Read))
+                {
+                    buffer = new byte[fs.Length];
+                    fs.Read(buffer, 0, (int)fs.Length);
+                    longitud = (int)fs.Length;
+                }
+                return buffer;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
     }
 }

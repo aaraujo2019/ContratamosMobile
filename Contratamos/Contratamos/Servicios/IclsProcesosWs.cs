@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Contratamos.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -6,10 +7,11 @@ namespace Contratamos.Servicios
 {
     public interface IclsProcesosWs
     {
-        List<Models.Profesiones> CargarProfesiones();
-        List<Models.TipoUsuario> CargarTipoUsuario();
+        List<Profesiones> CargarProfesiones();
+        List<TipoUsuario> CargarTipoUsuario();
         DataSet CargarOfertas();
         DataSet ConsultarTipoUsuarioId(int idTipoUsuario);
+        void InsetarOfertaEmpleo(Ofertas ofertas);
 
     }
 }

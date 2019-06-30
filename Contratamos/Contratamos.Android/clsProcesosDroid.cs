@@ -1,4 +1,5 @@
-﻿using Contratamos.Servicios;
+﻿using Contratamos.Models;
+using Contratamos.Servicios;
 using System.Collections.Generic;
 using System.Data;
 
@@ -6,13 +7,13 @@ namespace Contratamos.Droid
 {
     public class clsProcesosDroid : IclsProcesosWs
     {
-        Models.Profesiones profesiones;
+        Profesiones profesiones;
         public clsProcesosDroid()
         {
-            profesiones = new Models.Profesiones();
+            profesiones = new Profesiones();
         }
 
-        public List<Models.Profesiones> CargarProfesiones()
+        public List<Profesiones> CargarProfesiones()
         {
             try
             {
@@ -24,7 +25,7 @@ namespace Contratamos.Droid
             }
         }
 
-        public List<Models.TipoUsuario> CargarTipoUsuario()
+        public List<TipoUsuario> CargarTipoUsuario()
         {
             try
             {
@@ -53,6 +54,18 @@ namespace Contratamos.Droid
             try
             {
                 return Conexion.BaseDatos.ConsultarTipoUsuarioId(idTipoUsuario);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        public void InsetarOfertaEmpleo(Ofertas ofertas)
+        {
+            try
+            {
+                Conexion.BaseDatos.GuardarOfertaEmpleo(ofertas);
             }
             catch (System.Exception)
             {

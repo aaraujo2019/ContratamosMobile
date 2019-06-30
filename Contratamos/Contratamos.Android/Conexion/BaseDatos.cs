@@ -1,8 +1,8 @@
-﻿using System.Data;
-using System.Data.SqlClient;
-using System.Collections.Generic;
-using Contratamos.Models;
+﻿using Contratamos.Models;
 using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Contratamos.Droid.Conexion
 {
@@ -25,7 +25,7 @@ namespace Contratamos.Droid.Conexion
 
                 param[0].Value = pUsuario;
                 param[1].Value = pClave;
-                                
+
                 DataSet datosFiltros = new DataSet();
                 datosFiltros = ValidarUsuarioLogin("ValidarUsuario", param);
 
@@ -83,7 +83,7 @@ namespace Contratamos.Droid.Conexion
                 {
                     command.Parameters.Add(par);
                 }
-                
+
                 command.CommandType = CommandType.StoredProcedure;
                 new SqlDataAdapter(command).Fill(ds);
                 return ds;
@@ -94,7 +94,11 @@ namespace Contratamos.Droid.Conexion
             }
             finally
             {
-                if (command.Connection.State == ConnectionState.Open) command.Connection.Close();
+                if (command.Connection.State == ConnectionState.Open)
+                {
+                    command.Connection.Close();
+                }
+
                 command.Parameters.Clear();
                 command.Dispose();
                 ds.Dispose();
@@ -265,6 +269,37 @@ namespace Contratamos.Droid.Conexion
                     cmdConsulta.Parameters.AddWithValue("@pIdTipoUsuario", usuario.IdTipoUsuario);
                     cmdConsulta.Parameters.AddWithValue("@pArchivoCv", archivoByte);
                     cmdConsulta.Parameters.AddWithValue("@pIdUsuario", usuario.IdUsuario);
+                    cmdConsulta.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+        public static void GuardarOfertaEmpleo(Ofertas oferta)
+        {
+            try
+            {
+                SqlConnection cn = getConnection();
+                cn.Open();
+
+                using (SqlCommand cmdConsulta = new SqlCommand("decasa_admin.InsertarOfertas", cn))
+                {
+                    cmdConsulta.CommandType = CommandType.StoredProcedure;
+                    cmdConsulta.Parameters.Clear();
+                    cmdConsulta.Parameters.AddWithValue("@pTitulo", oferta.Titulo);
+                    cmdConsulta.Parameters.AddWithValue("@pDescripcionOferta", oferta.DescripcionOferta);
+                    cmdConsulta.Parameters.AddWithValue("@pSalario", oferta.Salario);
+                    cmdConsulta.Parameters.AddWithValue("@pOfertaDesde", oferta.OfertaDesde);
+                    cmdConsulta.Parameters.AddWithValue("@pOfertaHasta", oferta.OfertaHasta);
+                    cmdConsulta.Parameters.AddWithValue("@pIdProfesion", oferta.IdProfesion);
+                    cmdConsulta.Parameters.AddWithValue("@pIdUsuario", oferta.IdUsuario);
+                    cmdConsulta.Parameters.AddWithValue("@pIdEstado", oferta.IdEstado);
+                    cmdConsulta.Parameters.AddWithValue("@pIdDispositivo", oferta.IdDispositivo);
+
                     cmdConsulta.ExecuteNonQuery();
                 }
             }
