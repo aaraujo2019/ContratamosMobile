@@ -57,8 +57,8 @@ namespace Contratamos.Menu
 
                 case 4:
 
-                    //if (modGeneral.clsUsuario != null)
-                    //{
+                    if (modGeneral.clsUsuario != null)
+                    {
                         MasterDetailPage = null;
                         MasterDetailPage = new MasterDetailPage
                         {
@@ -67,20 +67,20 @@ namespace Contratamos.Menu
                         };
 
                         App.Current.MainPage = MasterDetailPage;
-                    //}
-                    //else
-                    //{
-                    //    await App.Current.MainPage.DisplayAlert("Contratámos", "Para poder acceder a esta opción de iniciar sesión primero.", "Ok");
-                    //    MasterDetailPage = null;
-                    //    MasterDetailPage = new MasterDetailPage
-                    //    {
-                    //        Master = new MenuPage(),
-                    //        Detail = new NavigationPage(new Login()),
-                    //    };
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("Contratámos", "Para poder acceder a esta opción de iniciar sesión primero.", "Ok");
+                        MasterDetailPage = null;
+                        MasterDetailPage = new MasterDetailPage
+                        {
+                            Master = new MenuPage(),
+                            Detail = new NavigationPage(new Login()),
+                        };
 
-                    //    App.Current.MainPage = MasterDetailPage;
-                    //}
- 
+                        App.Current.MainPage = MasterDetailPage;
+                    }
+
                     break;
 
                 case 3:

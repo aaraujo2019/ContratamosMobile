@@ -1,4 +1,5 @@
 ﻿using Contratamos.Models;
+using System.Data;
 
 namespace Contratamos.Clases
 {
@@ -17,6 +18,21 @@ namespace Contratamos.Clases
         public void ActualizarUsuario(Usuarios usuario)
         {
             App.objWSUsuarios.ActualizarUsuario(usuario);
+        }
+
+        public int InsertarOferta(Ofertas oferta)
+        {
+           return App.objWSProcesos.InsetarOfertaEmpleo(oferta);
+        }
+
+        public DataSet BuscarOfertasPorId(int idOferta)
+        {
+            return App.objWSProcesos.BuscarOfertasPorId(idOferta);
+        }
+
+        public void ActualizarOferta(Ofertas ofertas)
+        {
+            App.objWSProcesos.ActualizarOferta(ofertas);
         }
 
     }

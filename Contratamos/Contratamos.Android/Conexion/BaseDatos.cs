@@ -11,7 +11,7 @@ namespace Contratamos.Droid.Conexion
         private static string cadenaConexion = @"data source=190.8.176.202;initial catalog=decasa_empleos;user id=decasa_empleos;password=Empl30s2019*.";
         private static Dictionary<int, string> retorno;
 
-        public static Models.Usuarios ValidarUsuarioConexionAcceso(string pUsuario, string pClave)
+        public static Usuarios ValidarUsuarioConexionAcceso(string pUsuario, string pClave)
         {
             bool estadoSesion = false;
             Models.Usuarios usuarios = new Models.Usuarios();
@@ -46,7 +46,7 @@ namespace Contratamos.Droid.Conexion
                 }
                 else
                 {
-                    retorno.Add(0, string.Concat("El usuario ", pUsuario, " no existe."));
+                    retorno.Add(0, string.Concat("El usuario ", pUsuario, " no iste."));
                     return null;
                 }
             }
@@ -215,7 +215,7 @@ namespace Contratamos.Droid.Conexion
                     return datosFiltros;
                 }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 return null;
             }
@@ -243,7 +243,7 @@ namespace Contratamos.Droid.Conexion
                     cmdConsulta.ExecuteNonQuery();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -272,18 +272,19 @@ namespace Contratamos.Droid.Conexion
                     cmdConsulta.ExecuteNonQuery();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
         }
 
 
-        public static void GuardarOfertaEmpleo(Ofertas oferta)
+        public static int GuardarOfertaEmpleo(Ofertas oferta)
         {
             try
             {
                 SqlConnection cn = getConnection();
+                DataSet datosFiltros = new DataSet();
                 cn.Open();
 
                 using (SqlCommand cmdConsulta = new SqlCommand("decasa_admin.InsertarOfertas", cn))
@@ -299,11 +300,69 @@ namespace Contratamos.Droid.Conexion
                     cmdConsulta.Parameters.AddWithValue("@pIdUsuario", oferta.IdUsuario);
                     cmdConsulta.Parameters.AddWithValue("@pIdEstado", oferta.IdEstado);
                     cmdConsulta.Parameters.AddWithValue("@pIdDispositivo", oferta.IdDispositivo);
+                    SqlDataAdapter daConsulta = new SqlDataAdapter(cmdConsulta);
+                    daConsulta.Fill(datosFiltros);
 
+                    return Convert.ToInt32(datosFiltros.Tables[0].Rows[0][0]);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static DataSet BuscarOfertasPorId(int idOferta)
+        {
+            try
+            {
+                SqlConnection cn = getConnection();
+                DataSet datosFiltros = new DataSet();
+                cn.Open();
+
+                using (SqlCommand cmdConsulta = new SqlCommand("decasa_admin.BuscarOfertasPorId", cn))
+                {
+                    cmdConsulta.CommandType = CommandType.StoredProcedure;
+                    cmdConsulta.Parameters.Clear();
+                    cmdConsulta.Parameters.AddWithValue("@pIdOferta", idOferta);
+                    SqlDataAdapter daConsulta = new SqlDataAdapter(cmdConsulta);
+                    daConsulta.Fill(datosFiltros);
+
+                    return datosFiltros;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static void ActualizarOferta(Ofertas oferta)
+        {
+            try
+            {
+                SqlConnection cn = getConnection();
+                DataSet datosFiltros = new DataSet();
+                cn.Open();
+
+                using (SqlCommand cmdConsulta = new SqlCommand("decasa_admin.ActualizarOferta", cn))
+                {
+                    cmdConsulta.CommandType = CommandType.StoredProcedure;
+                    cmdConsulta.Parameters.Clear();
+                    cmdConsulta.Parameters.AddWithValue("@pTitulo", oferta.Titulo);
+                    cmdConsulta.Parameters.AddWithValue("@pDescripcionOferta", oferta.DescripcionOferta);
+                    cmdConsulta.Parameters.AddWithValue("@pSalario", oferta.Salario);
+                    cmdConsulta.Parameters.AddWithValue("@pOfertaDesde", oferta.OfertaDesde);
+                    cmdConsulta.Parameters.AddWithValue("@pOfertaHasta", oferta.OfertaHasta);
+                    cmdConsulta.Parameters.AddWithValue("@pIdProfesion", oferta.IdProfesion);
+                    cmdConsulta.Parameters.AddWithValue("@pIdUsuario", oferta.IdUsuario);
+                    cmdConsulta.Parameters.AddWithValue("@pIdEstado", oferta.IdEstado);
+                    cmdConsulta.Parameters.AddWithValue("@pIdDispositivo", oferta.IdDispositivo);
+                    cmdConsulta.Parameters.AddWithValue("@pIdOferta", oferta.IdOferta);
                     cmdConsulta.ExecuteNonQuery();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

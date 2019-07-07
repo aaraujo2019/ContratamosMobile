@@ -11,7 +11,9 @@ namespace Contratamos.Servicios
         List<TipoUsuario> CargarTipoUsuario();
         DataSet CargarOfertas();
         DataSet ConsultarTipoUsuarioId(int idTipoUsuario);
-        void InsetarOfertaEmpleo(Ofertas ofertas);
+        int InsetarOfertaEmpleo(Ofertas ofertas);
+        DataSet BuscarOfertasPorId(int idOferta);
+        void ActualizarOferta(Ofertas ofertas);
 
     }
 }

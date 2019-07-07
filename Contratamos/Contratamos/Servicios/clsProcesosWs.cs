@@ -34,9 +34,19 @@ namespace Contratamos.Servicios
             return objProcesosWs.ConsultarTipoUsuarioId(idTipoUsuario);
         }
 
-        public void InsetarOfertaEmpleo(Ofertas ofertas)
+        public int InsetarOfertaEmpleo(Ofertas ofertas)
         {
-            objProcesosWs.InsetarOfertaEmpleo(ofertas);
+            return objProcesosWs.InsetarOfertaEmpleo(ofertas);
+        }
+
+        public DataSet BuscarOfertasPorId(int idOferta)
+        {
+            return objProcesosWs.BuscarOfertasPorId(idOferta);
+        }
+
+        public void ActualizarOferta(Ofertas ofertas)
+        {
+            objProcesosWs.ActualizarOferta(ofertas);
         }
     }
 }

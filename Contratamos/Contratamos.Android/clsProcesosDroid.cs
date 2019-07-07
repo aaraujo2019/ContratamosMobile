@@ -61,11 +61,35 @@ namespace Contratamos.Droid
             }
         }
 
-        public void InsetarOfertaEmpleo(Ofertas ofertas)
+        public int InsetarOfertaEmpleo(Ofertas ofertas)
         {
             try
             {
-                Conexion.BaseDatos.GuardarOfertaEmpleo(ofertas);
+                return Conexion.BaseDatos.GuardarOfertaEmpleo(ofertas);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataSet BuscarOfertasPorId(int idOferta)
+        {
+            try
+            {
+                return Conexion.BaseDatos.BuscarOfertasPorId(idOferta);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        public void ActualizarOferta(Ofertas ofertas)
+        {
+            try
+            {
+                Conexion.BaseDatos.ActualizarOferta(ofertas);
             }
             catch (System.Exception)
             {
