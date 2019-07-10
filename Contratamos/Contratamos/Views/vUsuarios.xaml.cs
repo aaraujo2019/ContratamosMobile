@@ -45,19 +45,14 @@ namespace Contratamos.Views
 
         private void CargarArchivoSimple(string Archivo)
         {
-            var _sNombreTemporal = string.Empty;
-
             try
             {
                 if (Device.RuntimePlatform == Device.Android)
                 {
                     byte[] pdfBytes = File.ReadAllBytes(Archivo);
                     string pdfBase64 = Convert.ToBase64String(pdfBytes);
-
-                    modGeneral.RutaArchivos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    _sNombreTemporal = Path.Combine(modGeneral.RutaArchivos, string.Concat(txtNombre.Text,"-",txtApellido.Text,"-",DateTime.Now.ToShortDateString(), ".pdf"));
-
-                    vUsuarioViewModel.User.ArchivoCv = modGeneral.ConvertirDocBinary(_sNombreTemporal);
+                    vUsuarioViewModel.User.ArchivoCv = modGeneral.ConvertirDocBinary(Archivo);
+                    txtRuta.Text = Archivo;
                 }
 
                 //VisualizarPdf(Archivo, _sNombreTemporal);

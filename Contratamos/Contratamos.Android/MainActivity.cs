@@ -26,11 +26,7 @@ namespace Contratamos.Droid
 
             clsConfiguracion.Iniciar(this);
             LoadApplication(new App());
-            
-            if (Device.Idiom == TargetIdiom.Tablet)
-                RequestedOrientation = ScreenOrientation.Landscape;
-            else
-                RequestedOrientation = ScreenOrientation.Portrait;
+            RequestedOrientation = ScreenOrientation.Portrait;
         }
 
         public override void OnBackPressed()
