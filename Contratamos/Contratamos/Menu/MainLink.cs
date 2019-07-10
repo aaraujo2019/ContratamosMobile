@@ -84,6 +84,7 @@ namespace Contratamos.Menu
                     break;
 
                 case 3:
+
                     MasterDetailPage = null;
                     MasterDetailPage = new MasterDetailPage
                     {
@@ -93,7 +94,9 @@ namespace Contratamos.Menu
 
                     App.Current.MainPage = MasterDetailPage;
                     break;
+
                 case 2:
+
                     MasterDetailPage = null;
                     MasterDetailPage = new MasterDetailPage
                     {
@@ -103,6 +106,7 @@ namespace Contratamos.Menu
 
                     App.Current.MainPage = MasterDetailPage;
                     break;
+
                 case 1:
 
                     if (modGeneral.clsUsuario != null)
