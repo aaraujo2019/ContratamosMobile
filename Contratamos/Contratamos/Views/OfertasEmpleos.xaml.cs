@@ -1,8 +1,7 @@
-﻿
-using Contratamos.Clases;
+﻿using Contratamos.Clases;
 using Contratamos.Generales;
+using Contratamos.Menu;
 using Contratamos.Models;
-using Contratamos.Servicios;
 using Contratamos.ViewModel;
 using Plugin.DeviceInfo;
 using System;
@@ -19,6 +18,8 @@ namespace Contratamos.Views
         public OfertasEmpleosViewModel OfertasEmpleosViewModel { get => ofertasEmpleosViewModel; set => ofertasEmpleosViewModel = value; }
         clsPrincipal clsPrincipal = new clsPrincipal();
         Ofertas objOferta;
+        private int idOferta = 0;
+        private MasterDetailPage MasterDetailPage;
 
         public OfertasEmpleos()
         {
@@ -33,6 +34,47 @@ namespace Contratamos.Views
             fechaFin.MinimumDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             fechaFin.MaximumDate = new DateTime(DateTime.Now.Year, 12, 31);
             fechaFin.Date = new DateTime(DateTime.Now.Year, 12, DateTime.Now.Day);
+
+            btnAplicar.IsVisible = false;
+            btnGuardar.IsVisible = true;
+        }
+
+        public OfertasEmpleos(Ofertas ofertaSelecc)
+        {
+            InitializeComponent();
+            BindingContext = OfertasEmpleosViewModel = new OfertasEmpleosViewModel();
+            OfertasEmpleosViewModel.Navigation = this.Navigation;
+
+            objOferta = ofertaSelecc;
+            idOferta = ofertaSelecc.IdOferta;
+            txtTituloVista.Text = string.Concat("Oferta de Empléo, ", idOferta);
+
+            txtTitulo.Text = ofertaSelecc.Titulo;
+            txtTitulo.IsEnabled = false;
+
+            fechaInicio.Date = Convert.ToDateTime(ofertaSelecc.OfertaDesde.ToShortDateString());
+            fechaInicio.IsEnabled = false;
+
+            fechaFin.Date = Convert.ToDateTime(ofertaSelecc.OfertaHasta.ToShortDateString());
+            fechaFin.IsEnabled = false;
+
+            cmbProfesiones.SelectedIndex = ofertaSelecc.IdProfesion;
+            cmbProfesiones.IsEnabled = false;
+
+            txtSalario.Text = ofertaSelecc.Salario.ToString("C2");
+            txtSalario.IsEnabled = false;
+
+            txtDetalleOferta.Text = ofertaSelecc.DescripcionOferta;
+            txtDetalleOferta.IsEnabled = false;
+
+            swEstadoOferta.IsToggled = ofertaSelecc.IdEstado == 1 ? true : false;
+            swEstadoOferta.IsEnabled = false;
+
+            txtBuscar.IsVisible = false;
+            btnBuscar.IsVisible = false;
+
+            btnAplicar.IsVisible = true;
+            btnGuardar.IsVisible = false;
         }
 
         private void btnGuardar_Clicked(object sender, EventArgs e)
@@ -90,8 +132,15 @@ namespace Contratamos.Views
                 objOferta.IdEstado = swEstadoOferta.IsToggled == true ? 1 : 2;
                 objOferta.IdDispositivo = CrossDeviceInfo.Current.Id;
 
-                var resultado = clsPrincipal.InsertarOferta(objOferta);
-                App.Current.MainPage.DisplayAlert("Contratámos", string.Concat("La Oferta No. ", resultado, ", fue ingresada con exito. "), "Ok");
+                if (modGeneral.clsUsuario != null && (modGeneral.clsUsuario.IdTipoUsuario == 1 || modGeneral.clsUsuario.IdTipoUsuario == 2))
+                {
+                    var resultado = clsPrincipal.InsertarOferta(objOferta);
+                    App.Current.MainPage.DisplayAlert("Contratámos", string.Concat("La Oferta No. ", resultado, ", fue ingresada con exito. "), "Ok");
+                }
+                else
+                {
+                    App.Current.MainPage.DisplayAlert("Contratámos", "Debe ser propietario para modificar la oferta", "Ok");
+                }
             }
             else
             {
@@ -154,17 +203,30 @@ namespace Contratamos.Views
 
         private void btnNuevo_Clicked(object sender, EventArgs e)
         {
+            txtTituloVista.Text = "Oferta de Empléo";
             txtTitulo.Text = string.Empty;
+            txtTitulo.IsEnabled = true;
             cmbProfesiones.SelectedIndex = -1;
+            cmbProfesiones.IsEnabled = true;
             fechaInicio.Date = DateTime.Now;
+            fechaInicio.IsEnabled = true;
             fechaFin.Date = fechaInicio.Date;
+            fechaFin.IsEnabled = true;
             txtSalario.Text = string.Empty;
+            txtSalario.IsEnabled = true;
             txtDetalleOferta.Text = string.Empty;
+            txtDetalleOferta.IsEnabled = true;
             lblEstado.Text = "Inactivo";
             swEstadoOferta.IsToggled = false;
-            txtDetalleOferta.Text = string.Empty;
+            swEstadoOferta.IsEnabled = true;
+
+            idOferta = 0;
             objOferta = null;
             txtBuscar.Text = string.Empty;
+            txtBuscar.IsVisible = true;
+            btnBuscar.IsVisible = true;
+            btnAplicar.IsVisible = false;
+            btnGuardar.IsVisible = true;
         }
 
         private void Switch_Toggled(object sender, ToggledEventArgs e)
@@ -179,7 +241,7 @@ namespace Contratamos.Views
             }
             catch (Exception)
             {
-                App.Current.MainPage.DisplayAlert("Contratámos", "Ha ocurrido un problema.", "Ok");
+                App.Current.MainPage.DisplayAlert("Contratámos", "Ha ocurrido un problema. Switch_Toggled", "Ok");
             }
         }
 
@@ -212,6 +274,28 @@ namespace Contratamos.Views
                     txtDetalleOferta.Text = objOferta.DescripcionOferta;
                     swEstadoOferta.IsToggled = objOferta.IdEstado == 1 ? true : false;
                 }
+            }
+        }
+
+        private void btnAplicar_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                clsPrincipal.GuardarAplicacion(idOferta, modGeneral.clsUsuario.IdUsuario, CrossDeviceInfo.Current.Id);
+                App.Current.MainPage.DisplayAlert("Contratámos", string.Concat("Usted ha aplicado para: ", objOferta.Titulo), "Ok");
+
+                MasterDetailPage = null;
+                MasterDetailPage = new MasterDetailPage
+                {
+                    Master = new MenuPage(),
+                    Detail = new NavigationPage(new PagPrincipal()),
+                };
+
+                App.Current.MainPage = MasterDetailPage;
+            }
+            catch (Exception)
+            {
+                App.Current.MainPage.DisplayAlert("Contratámos", "Ha ocurrido un problema. Switch_Toggled", "Ok");
             }
         }
     }

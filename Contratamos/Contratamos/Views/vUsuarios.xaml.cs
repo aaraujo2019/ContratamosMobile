@@ -3,7 +3,6 @@ using Contratamos.Generales;
 using Contratamos.ViewModel;
 using System;
 using System.IO;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -54,8 +53,6 @@ namespace Contratamos.Views
                     vUsuarioViewModel.User.ArchivoCv = modGeneral.ConvertirDocBinary(Archivo);
                     txtRuta.Text = Archivo;
                 }
-
-                //VisualizarPdf(Archivo, _sNombreTemporal);
             }
             catch (Exception ex)
             {

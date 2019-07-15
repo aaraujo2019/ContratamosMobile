@@ -5,7 +5,7 @@ namespace Contratamos.Clases
 {
     public class clsPrincipal
     {
-        public Models.Usuarios ValidarUsuario(string Usuario, string Pass)
+        public Usuarios ValidarUsuario(string Usuario, string Pass)
         {
             return App.objWSUsuarios.Login(Usuario, Pass);
         }
@@ -33,6 +33,11 @@ namespace Contratamos.Clases
         public void ActualizarOferta(Ofertas ofertas)
         {
             App.objWSProcesos.ActualizarOferta(ofertas);
+        }
+        
+        public void GuardarAplicacion(int idOferta, int idUsuario, string IdDispositivo)
+        {
+            App.objWSProcesos.GuardarAplicacion(idOferta, idUsuario, IdDispositivo);
         }
 
     }

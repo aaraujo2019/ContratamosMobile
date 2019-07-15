@@ -14,6 +14,7 @@ namespace Contratamos.Servicios
         int InsetarOfertaEmpleo(Ofertas ofertas);
         DataSet BuscarOfertasPorId(int idOferta);
         void ActualizarOferta(Ofertas ofertas);
+        void GuardarAplicacion(int idOferta, int idUsuario, string IdDispositivo);
 
     }
 }

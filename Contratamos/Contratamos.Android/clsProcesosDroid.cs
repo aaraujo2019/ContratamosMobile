@@ -97,5 +97,18 @@ namespace Contratamos.Droid
             }
         }
 
+
+        public void GuardarAplicacion(int idOferta, int idUsuario, string IdDispositivo)
+        {
+            try
+            {
+                Conexion.BaseDatos.GuardarAplicacion(idOferta, idUsuario, IdDispositivo);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

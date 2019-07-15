@@ -74,7 +74,6 @@ namespace Contratamos.Menu
             }
 
             ContentContainer.Content = TextContainer;
-
             ContentGrid.Children.Add(ContentContainer);
 
             base.Content = ContentGrid;

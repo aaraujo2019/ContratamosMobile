@@ -368,5 +368,29 @@ namespace Contratamos.Droid.Conexion
             }
         }
 
+
+        public static void GuardarAplicacion(int idOferta, int idUsuario, string IdDispositivo)
+        {
+            try
+            {
+                SqlConnection cn = getConnection();
+                cn.Open();
+
+                using (SqlCommand cmdConsulta = new SqlCommand("decasa_admin.InsertarAplicacion", cn))
+                {
+                    cmdConsulta.CommandType = CommandType.StoredProcedure;
+                    cmdConsulta.Parameters.Clear();
+                    cmdConsulta.Parameters.AddWithValue("@pIdOferta", idOferta);
+                    cmdConsulta.Parameters.AddWithValue("@pIdUsuario", idUsuario);
+                    cmdConsulta.Parameters.AddWithValue("@pIdDispositivo", IdDispositivo);
+                    cmdConsulta.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

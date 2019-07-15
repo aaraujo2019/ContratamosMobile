@@ -15,7 +15,7 @@
                         </Grid.RowDefinitions>
 
                         <StackLayout x:Name="stMensaje" Grid.Row="0" Margin="0,20,0,10"/>
-                        <Label Grid.Row="0" Text="Oferta de Empléo" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                        <Label Grid.Row="0" x:Name="txtTituloVista" Text="Oferta de Empléo" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
                             <Label.FontSize>
                                 <OnIdiom x:TypeArguments="x:Double"                     
                                Phone="15"                  
@@ -178,6 +178,11 @@
                             <StackLayout x:Name="btnGuardar" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" HorizontalOptions="Center" Margin="0,0,0,0">
                                 <Button Text="Guardar" BackgroundColor="#0072BD" Margin="2,30,2,10"
                             TextColor="White" FontSize="18" Clicked="btnGuardar_Clicked"/>
+                            </StackLayout>
+
+                            <StackLayout x:Name="btnAplicar" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" HorizontalOptions="Center" Margin="0,0,0,0">
+                                <Button Text="Aplicar" BackgroundColor="#0072BD" Margin="2,30,2,10"
+                            TextColor="White" FontSize="18" Clicked="btnAplicar_Clicked"/>
                             </StackLayout>
 
                             <StackLayout x:Name="btnNuevo" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" HorizontalOptions="Center" Margin="0,0,0,0">

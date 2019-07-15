@@ -2,12 +2,14 @@
 using Android.App;
 using Contratamos.Clases;
 using Contratamos.Generales;
+using Contratamos.Menu;
 using Contratamos.Models;
 using Contratamos.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,8 +19,9 @@ namespace Contratamos.Views
     public partial class PagPrincipal : ContentPage
     {
         private PagPrincipalViewModel pagPrincipalViewModel;
-        private WebView webView;
         private StackLayout _Panel;
+        private List<Ofertas> listOfertas;
+        private MasterDetailPage MasterDetailPage;
 
         public PagPrincipal()
         {
@@ -30,7 +33,7 @@ namespace Contratamos.Views
             pagPrincipalViewModel.IsVisibleTexto = true;
 
             DataSet ofertas = App.objWSProcesos.CargarOfertas();
-            List<Ofertas> listOfertas = new List<Ofertas>();
+            listOfertas = new List<Ofertas>();
 
             foreach (DataRow dr in ofertas.Tables[0].Rows)
             {
@@ -68,6 +71,7 @@ namespace Contratamos.Views
             {
                 return;
             });
+
             alert.Show();
         }
 
@@ -86,7 +90,7 @@ namespace Contratamos.Views
                     pagPrincipalViewModel.IsVisiblePicker = false;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 App.Current.MainPage.DisplayAlert("Contratámos", "Ha ocurrido un problema.", "Ok");
             }
@@ -112,16 +116,7 @@ namespace Contratamos.Views
                     valor.SetBinding(Label.TextProperty, "Value");
                     valor.Margin = new Thickness(5, 10);
 
-                    MenuItem moreAction = new MenuItem { Text = "SELECCIONAR DOCUMENTO LOCAL", };
-                    moreAction.Clicked += (sender, e) =>
-                    {
-                        MenuItem mi = ((MenuItem)sender);
-                        OpenFolderDialogAsync();
-                    };
-
                     ViewCell mViewCell = new ViewCell();
-                    mViewCell.ContextActions.Add(moreAction);
-
                     View view = new StackLayout
                     {
                         Orientation = StackOrientation.Horizontal,
@@ -156,46 +151,47 @@ namespace Contratamos.Views
                 _Panel = new StackLayout { Children = { titulo, listView } };
                 pnlPlantillas.Children.Add(_Panel);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //clsConfiguracion.Main(string.Concat("Ha ocurrido un problema al momento de cargar los documentos.", ex.Message), "ListarDocumentos(); Anexos", modGeneral.usuario);
                 App.Current.MainPage.DisplayAlert("Contratámos", "Ha ocurrido un problema al momento de cargar los documentos.", "Ok");
             }
         }
 
         private void List_Itemselected(object sender, SelectedItemChangedEventArgs e)
         {
-            ((ListView)sender).SelectedItem = null;
-
-            if (((ListView)sender).SelectedItem != null)
+            if (modGeneral.clsUsuario != null)
             {
-                var resp = (KeyValuePair<int, string>)e.SelectedItem;
-                //IdPantilla = resp.Key;
-                //modGeneral.IDPlantillaActual = IdPantilla;
+                ((ListView)sender).SelectedItem = null;
 
-                //if (clsConfiguracion.ModoIntegracion == "SI")
-                //    CargarPlantillaIntegracion();
-                //else CargarPlantilla(IdPantilla);
-            }
-        }
-
-        public async void OpenFolderDialogAsync()
-        {
-            SimpleFileDialog fileDialog = new SimpleFileDialog(clsConfiguracion.mContext, SimpleFileDialog.FileSelectionMode.FileOpen);
-            string path = await fileDialog.GetFileOrDirectoryAsync(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath);
-
-            if (!String.IsNullOrEmpty(path))
-            {
-                if (Path.GetExtension(path) != ".pdf")
+                if (((ListView)sender).SelectedItem != null)
                 {
-                    await App.Current.MainPage.DisplayAlert("Contratámos", "Debe seleccionar solo archivos .pdf", "Ok");
-                    return;
-                }
+                    var resp = (KeyValuePair<int, string>)e.SelectedItem;
+                    var idOferta = resp.Key;
+                    var ofertaCompleta = listOfertas.Where(o => o.IdOferta == idOferta).FirstOrDefault();
 
-                //CargarArchivoSimple(path);
+                    MasterDetailPage = null;
+                    MasterDetailPage = new MasterDetailPage
+                    {
+                        Master = new MenuPage(),
+                        Detail = new NavigationPage(new OfertasEmpleos(ofertaCompleta)),
+                    };
+
+                    App.Current.MainPage = MasterDetailPage;
+                }
+            }
+            else
+            {
+                App.Current.MainPage.DisplayAlert("Contratamos", "Debe inicar sesión para poder acceder a esta opción.", "Ok");
+                MasterDetailPage = null;
+                MasterDetailPage = new MasterDetailPage
+                {
+                    Master = new MenuPage(),
+                    Detail = new NavigationPage(new Login()),
+                };
+
+                App.Current.MainPage = MasterDetailPage;
             }
         }
-
 
     }
 }

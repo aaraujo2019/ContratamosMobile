@@ -1,4 +1,7 @@
-﻿using Contratamos.Generales;
+﻿using Android;
+using Android.App;
+using Contratamos.Clases;
+using Contratamos.Generales;
 using Contratamos.Views;
 using System;
 using Xamarin.Forms;
@@ -27,6 +30,39 @@ namespace Contratamos.Menu
         {
             switch (opcion)
             {
+                case 7:
+
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(clsConfiguracion.mContext);
+                    AlertDialog alert = dialog.Create();
+
+                    alert.SetTitle("Contratámos");
+                    alert.SetMessage("¿Esta seguro que quiere salir.?");
+                    alert.SetIcon(Resource.Drawable.IcDialogAlert);
+                    alert.SetButton("OK", (c, ev) =>
+                    {
+                        Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
+                    });
+                    alert.SetButton2("Cancelar", (s, ed) =>
+                    {
+                        return;
+                    });
+                    alert.Show();
+
+                    break;
+
+                case 6:
+
+                    MasterDetailPage = null;
+                    MasterDetailPage = new MasterDetailPage
+                    {
+                        Master = new MenuPage(),
+                        Detail = new NavigationPage(new PagPrincipal()),
+                    };
+
+                    App.Current.MainPage = MasterDetailPage;
+
+                    break;
+
                 case 5:
 
                     if (modGeneral.clsUsuario != null)
@@ -59,14 +95,29 @@ namespace Contratamos.Menu
 
                     if (modGeneral.clsUsuario != null)
                     {
-                        MasterDetailPage = null;
-                        MasterDetailPage = new MasterDetailPage
+                        if (modGeneral.clsUsuario.IdTipoUsuario == 2 || modGeneral.clsUsuario.IdTipoUsuario == 1)
                         {
-                            Master = new MenuPage(),
-                            Detail = new NavigationPage(new OfertasEmpleos()),
-                        };
+                            MasterDetailPage = null;
+                            MasterDetailPage = new MasterDetailPage
+                            {
+                                Master = new MenuPage(),
+                                Detail = new NavigationPage(new OfertasEmpleos()),
+                            };
 
-                        App.Current.MainPage = MasterDetailPage;
+                            App.Current.MainPage = MasterDetailPage;
+                        }
+                        else
+                        {
+                            await App.Current.MainPage.DisplayAlert("Contratámos", "Para poder acceder a esta opción debe ser propietario.", "Ok");
+                            MasterDetailPage = null;
+                            MasterDetailPage = new MasterDetailPage
+                            {
+                                Master = new MenuPage(),
+                                Detail = new NavigationPage(new PagPrincipal()),
+                            };
+
+                            App.Current.MainPage = MasterDetailPage;
+                        }
                     }
                     else
                     {

@@ -48,5 +48,10 @@ namespace Contratamos.Servicios
         {
             objProcesosWs.ActualizarOferta(ofertas);
         }
+
+        public void GuardarAplicacion(int idOferta, int idUsuario, string IdDispositivo)
+        {
+            objProcesosWs.GuardarAplicacion(idOferta, idUsuario, IdDispositivo);
+        }
     }
 }
