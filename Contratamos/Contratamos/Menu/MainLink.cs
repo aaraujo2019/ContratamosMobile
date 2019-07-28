@@ -71,7 +71,7 @@ namespace Contratamos.Menu
                         MasterDetailPage = new MasterDetailPage
                         {
                             Master = new MenuPage(),
-                            Detail = new NavigationPage(new Profesiones()),
+                            Detail = new NavigationPage(new vProfesiones()),
                         };
 
                         App.Current.MainPage = MasterDetailPage;
@@ -88,7 +88,7 @@ namespace Contratamos.Menu
 
                         App.Current.MainPage = MasterDetailPage;
                     }
- 
+
                     break;
 
                 case 4:
@@ -164,7 +164,6 @@ namespace Contratamos.Menu
                         App.Current.MainPage = new NavigationPage(new vUsuarios());
                     else
                     {
-                        await App.Current.MainPage.DisplayAlert("Contratámos", "Para poder acceder a esta opción de iniciar sesión primero.", "Ok");
                         MasterDetailPage = null;
                         MasterDetailPage = new MasterDetailPage
                         {

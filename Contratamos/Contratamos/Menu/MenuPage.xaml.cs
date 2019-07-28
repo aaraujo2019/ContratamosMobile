@@ -27,7 +27,7 @@ namespace Contratamos.Menu
                     new MainLink(TituloMenu, 1),
                     new MainLink("Crear Usuario", 2),
                     ((modGeneral.clsUsuario != null) && (modGeneral.clsUsuario.IdTipoUsuario == 1)) ?
-                        new MainLink("Agregar Profesiones", 5) :
+                        new MainLink("Profesiones", 5) :
                         new MainLink("Salir", 7)
                 }
             };

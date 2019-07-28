@@ -298,5 +298,17 @@ namespace Contratamos.Views
                 App.Current.MainPage.DisplayAlert("Contratámos", "Ha ocurrido un problema. Switch_Toggled", "Ok");
             }
         }
+
+        private void MnuRegresar_Clicked(object sender, EventArgs e)
+        {
+            MasterDetailPage = null;
+            MasterDetailPage = new MasterDetailPage
+            {
+                Master = new MenuPage(),
+                Detail = new NavigationPage(new PagPrincipal()),
+            };
+
+            App.Current.MainPage = MasterDetailPage;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Contratamos.Clases;
 using Contratamos.Generales;
+using Contratamos.Menu;
 using Contratamos.ViewModel;
 using System;
 using System.IO;
@@ -14,6 +15,7 @@ namespace Contratamos.Views
         private vUsuarioViewModel vusuarioViewModel;
         public vUsuarioViewModel vUsuarioViewModel { get => vusuarioViewModel; set => vusuarioViewModel = value; }
         public modGeneral modGeneral = new modGeneral();
+        private MasterDetailPage MasterDetailPage;
 
         public vUsuarios()
         {
@@ -75,6 +77,18 @@ namespace Contratamos.Views
         private void BtnBuscar_Clicked(object sender, EventArgs e)
         {
             OpenFolderDialogAsync();
+        }
+
+        private void MnuRegresar_Clicked(object sender, EventArgs e)
+        {
+            MasterDetailPage = null;
+            MasterDetailPage = new MasterDetailPage
+            {
+                Master = new MenuPage(),
+                Detail = new NavigationPage(new PagPrincipal()),
+            };
+
+            App.Current.MainPage = MasterDetailPage;
         }
     }
 }

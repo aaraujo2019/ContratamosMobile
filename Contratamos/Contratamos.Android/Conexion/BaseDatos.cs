@@ -392,5 +392,79 @@ namespace Contratamos.Droid.Conexion
             }
         }
 
+
+        public static DataSet BuscarProfesionPorId(int idProfesion)
+        {
+            try
+            {
+                SqlConnection cn = getConnection();
+                DataSet datosFiltros = new DataSet();
+                cn.Open();
+
+                using (SqlCommand cmdConsulta = new SqlCommand("decasa_admin.BuscarProfesionPorId", cn))
+                {
+                    cmdConsulta.CommandType = CommandType.StoredProcedure;
+                    cmdConsulta.Parameters.Clear();
+                    cmdConsulta.Parameters.AddWithValue("@pIdProfesion", idProfesion);
+                    SqlDataAdapter daConsulta = new SqlDataAdapter(cmdConsulta);
+                    daConsulta.Fill(datosFiltros);
+
+                    return datosFiltros;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static int GuardarProfesion(string Descripcion)
+        {
+            try
+            {
+                SqlConnection cn = getConnection();
+                DataSet datosFiltros = new DataSet();
+                cn.Open();
+
+                using (SqlCommand cmdConsulta = new SqlCommand("decasa_admin.InsertarProfesion", cn))
+                {
+                    cmdConsulta.CommandType = CommandType.StoredProcedure;
+                    cmdConsulta.Parameters.Clear();
+                    cmdConsulta.Parameters.AddWithValue("@pDescripcion", Descripcion);
+                    SqlDataAdapter daConsulta = new SqlDataAdapter(cmdConsulta);
+                    daConsulta.Fill(datosFiltros);
+
+                    return Convert.ToInt32(datosFiltros.Tables[0].Rows[0][0]);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static void ActualizarProfesion(Profesiones profesiones)
+        {
+            try
+            {
+                SqlConnection cn = getConnection();
+                DataSet datosFiltros = new DataSet();
+                cn.Open();
+
+                using (SqlCommand cmdConsulta = new SqlCommand("decasa_admin.ActualizarProfesion", cn))
+                {
+                    cmdConsulta.CommandType = CommandType.StoredProcedure;
+                    cmdConsulta.Parameters.Clear();
+                    cmdConsulta.Parameters.AddWithValue("@pDescripcion", profesiones.Descripcion);
+                    cmdConsulta.Parameters.AddWithValue("@pIdProfesion", profesiones.IdProfesion);
+                    cmdConsulta.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

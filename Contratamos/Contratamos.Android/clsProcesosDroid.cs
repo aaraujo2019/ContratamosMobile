@@ -110,5 +110,43 @@ namespace Contratamos.Droid
             }
         }
 
+        public DataSet BuscarProfesionPorId(int idProfesion)
+        {
+            try
+            {
+                return Conexion.BaseDatos.BuscarProfesionPorId(idProfesion);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        public int GuardarProfesion(string Descripcion)
+        {
+            try
+            {
+                return Conexion.BaseDatos.GuardarProfesion(Descripcion);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void ActualizarProfesion(Profesiones profesiones)
+        {
+            try
+            {
+                Conexion.BaseDatos.ActualizarProfesion(profesiones);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

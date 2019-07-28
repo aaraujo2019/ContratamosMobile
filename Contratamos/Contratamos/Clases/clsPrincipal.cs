@@ -40,5 +40,19 @@ namespace Contratamos.Clases
             App.objWSProcesos.GuardarAplicacion(idOferta, idUsuario, IdDispositivo);
         }
 
+        public DataSet BuscarProfesionPorId(int idProfesion)
+        {
+            return App.objWSProcesos.BuscarProfesionPorId(idProfesion);
+        }
+
+        public int GuardarProfesion(string Descripcion)
+        {
+            return App.objWSProcesos.GuardarProfesion(Descripcion);
+        }
+
+        public void ActualizarProfesion(Profesiones profesiones)
+        {
+            App.objWSProcesos.ActualizarProfesion(profesiones);
+        }
     }
 }

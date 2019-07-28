@@ -3,6 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Contratamos.Behaviors"
              x:Class="Contratamos.Views.vUsuarios">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="mnuRegresar" Order="Primary" Text="Regresar" Priority="1" Clicked="MnuRegresar_Clicked"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <StackLayout>
             <ScrollView>
