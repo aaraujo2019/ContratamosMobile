@@ -48,6 +48,8 @@
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <AndroidSupportedAbis />
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <MandroidI18n>West</MandroidI18n>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />

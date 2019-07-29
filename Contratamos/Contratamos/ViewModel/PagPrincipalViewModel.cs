@@ -1,5 +1,6 @@
 ﻿using Contratamos.Models;
 using Contratamos.Servicios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
@@ -60,15 +61,19 @@ namespace Contratamos.ViewModel
 
         public PagPrincipalViewModel()
         {
+            LlenarLista();                
+        }
+
+        private async void LlenarLista()
+        {
             try
             {
                 ListaDeProfesiones = ProfesionServices.ObtenerProfesiones().OrderBy(p => p.IdProfesion).ToList();
             }
             catch (System.Exception ex)
             {
-                App.Current.MainPage.DisplayAlert("Contratámos - Ppal", string.Concat("Ha ocurrido un problema: ", ex.Message), "Ok");
+                await App.Current.MainPage.DisplayAlert("Contratámos - Ppal", string.Concat("Ha ocurrido un problema: ", ex.Message), "Ok");
             }
-                
         }
     }
 }

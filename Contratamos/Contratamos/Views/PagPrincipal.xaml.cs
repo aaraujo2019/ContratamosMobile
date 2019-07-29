@@ -55,6 +55,8 @@ namespace Contratamos.Views
             ListarOfertas(listOfertas);
         }
 
+        protected override bool OnBackButtonPressed() => true;
+
         private void menuSalir_Clicked(object sender, EventArgs e)
         {
             AlertDialog.Builder dialog = new AlertDialog.Builder(clsConfiguracion.mContext);
