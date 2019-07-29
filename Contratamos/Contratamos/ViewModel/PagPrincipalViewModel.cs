@@ -60,7 +60,15 @@ namespace Contratamos.ViewModel
 
         public PagPrincipalViewModel()
         {
-            ListaDeProfesiones = ProfesionServices.ObtenerProfesiones().OrderBy(p => p.IdProfesion).ToList();    
+            try
+            {
+                ListaDeProfesiones = ProfesionServices.ObtenerProfesiones().OrderBy(p => p.IdProfesion).ToList();
+            }
+            catch (System.Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Contratámos - Ppal", string.Concat("Ha ocurrido un problema: ", ex.Message), "Ok");
+            }
+                
         }
     }
 }
