@@ -18,5 +18,6 @@ namespace Contratamos.Servicios
         DataSet BuscarProfesionPorId(int idProfesion);
         int GuardarProfesion(string Descripcion);
         void ActualizarProfesion(Profesiones profesiones);
+        DataSet FiltrarOferta(int opcion, string texto);
     }
 }

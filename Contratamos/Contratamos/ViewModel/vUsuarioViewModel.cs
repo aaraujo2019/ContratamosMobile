@@ -120,6 +120,13 @@ namespace Contratamos.ViewModel
                 App.Current.MainPage.DisplayAlert("Contratámos", "Las contraseñas deben coincidir", "Ok");
                 return;
             }
+            
+            if (User.IdTipoUsuario == -1)
+            {
+                App.Current.MainPage.DisplayAlert("Contratámos", "Debe seleccionar el tipo de usuario para continuar.", "Ok");
+                return;
+            }
+           
 
             if (User.Email != null)
             {
@@ -131,12 +138,12 @@ namespace Contratamos.ViewModel
             }
 
 
-            byte[] vacio = new byte[0];
-            if (User.ArchivoCv == vacio)
-            {
-                App.Current.MainPage.DisplayAlert("Contratámos", "Debe cargar su hoja de vida para continuar.", "Ok");
-                return;
-            }
+            //byte[] vacio = new byte[0];
+            //if (User.ArchivoCv == vacio)
+            //{
+            //    App.Current.MainPage.DisplayAlert("Contratámos", "Debe cargar su hoja de vida para continuar.", "Ok");
+            //    return;
+            //}
 
             if (User.IdUsuario != 0)
             {

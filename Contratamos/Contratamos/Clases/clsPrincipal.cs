@@ -22,7 +22,7 @@ namespace Contratamos.Clases
 
         public int InsertarOferta(Ofertas oferta)
         {
-           return App.objWSProcesos.InsetarOfertaEmpleo(oferta);
+            return App.objWSProcesos.InsetarOfertaEmpleo(oferta);
         }
 
         public DataSet BuscarOfertasPorId(int idOferta)
@@ -34,7 +34,7 @@ namespace Contratamos.Clases
         {
             App.objWSProcesos.ActualizarOferta(ofertas);
         }
-        
+
         public void GuardarAplicacion(int idOferta, int idUsuario, string IdDispositivo)
         {
             App.objWSProcesos.GuardarAplicacion(idOferta, idUsuario, IdDispositivo);
@@ -53,6 +53,11 @@ namespace Contratamos.Clases
         public void ActualizarProfesion(Profesiones profesiones)
         {
             App.objWSProcesos.ActualizarProfesion(profesiones);
+        }
+
+        public DataSet FiltrarOferta(int opcion, string texto)
+        {
+            return App.objWSProcesos.FiltrarOferta(opcion, texto);
         }
     }
 }

@@ -68,5 +68,10 @@ namespace Contratamos.Servicios
         {
             objProcesosWs.ActualizarProfesion(profesiones);
         }
+
+        public DataSet FiltrarOferta(int opcion, string texto)
+        {
+            return objProcesosWs.FiltrarOferta(opcion, texto);
+        }
     }
 }

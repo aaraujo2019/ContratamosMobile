@@ -148,5 +148,18 @@ namespace Contratamos.Droid
             }
         }
 
+        public DataSet FiltrarOferta(int opcion, string texto)
+        {
+            try
+            {
+                return Conexion.BaseDatos.FiltrarOferta(opcion, texto);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

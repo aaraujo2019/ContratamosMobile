@@ -22,6 +22,7 @@ namespace Contratamos.Views
         private StackLayout _Panel;
         private List<Ofertas> listOfertas;
         private MasterDetailPage MasterDetailPage;
+        private int OpcionBusqueda = 1;
 
         public PagPrincipal()
         {
@@ -85,11 +86,13 @@ namespace Contratamos.Views
                 {
                     pagPrincipalViewModel.IsVisibleTexto = false;
                     pagPrincipalViewModel.IsVisiblePicker = true;
+                    OpcionBusqueda = 2;
                 }
                 else
                 {
                     pagPrincipalViewModel.IsVisibleTexto = true;
                     pagPrincipalViewModel.IsVisiblePicker = false;
+                    OpcionBusqueda = 1;
                 }
             }
             catch (Exception)
@@ -195,5 +198,57 @@ namespace Contratamos.Views
             }
         }
 
+        private void BtnBuscar_Clicked(object sender, EventArgs e)
+        {
+            foreach (var item in pnlPlantillas.Children.ToList())
+            {
+                pnlPlantillas.Children.Remove(item);
+            }
+            
+            string textoBusqueda = string.Empty;
+            if (OpcionBusqueda == 1)
+            {
+                if (txtBusqueda.Text != null)
+                    textoBusqueda = txtBusqueda.Text;
+                else
+                {
+                    App.Current.MainPage.DisplayAlert("Contratamos", "Debe ingresar un criterio para la busqueda.", "Ok");
+                    txtBusqueda.Focus();
+                    return;
+                }
+            }
+            else
+            {
+                if (pagPrincipalViewModel.SelectedProfesion != null)
+                    textoBusqueda = pagPrincipalViewModel.SelectedProfesion.IdProfesion.ToString();
+                else
+                {
+                    App.Current.MainPage.DisplayAlert("Contratamos", "Debe seleccionar una profesión.", "Ok");
+                    return;
+                }
+            }
+
+            DataSet ofertas = App.objWSProcesos.FiltrarOferta(OpcionBusqueda, textoBusqueda);
+            listOfertas = new List<Ofertas>();
+
+            foreach (DataRow dr in ofertas.Tables[0].Rows)
+            {
+                listOfertas.Add(new Ofertas
+                {
+                    IdOferta = Convert.ToInt32(dr["IdOferta"]),
+                    Titulo = dr["Titulo"].ToString(),
+                    DescripcionOferta = dr["DescripcionOferta"].ToString(),
+                    Salario = Convert.ToDouble(dr["Salario"]),
+                    OfertaDesde = Convert.ToDateTime(dr["OfertaDesde"]),
+                    OfertaHasta = Convert.ToDateTime(dr["OfertaHasta"]),
+                    IdUsuario = Convert.ToInt32(dr["IdUsuario"]),
+                    IdDispositivo = dr["IdDispositivo"].ToString(),
+                    IdEstado = Convert.ToInt32(dr["IdEstado"]),
+                    IdProfesion = Convert.ToInt32(dr["IdProfesion"])
+                });
+            }
+
+            ListarOfertas(listOfertas);
+        }
     }
 }

@@ -466,5 +466,31 @@ namespace Contratamos.Droid.Conexion
             }
         }
 
+        public static DataSet FiltrarOferta(int opcion, string texto)
+        {
+            try
+            {
+                SqlConnection cn = getConnection();
+                DataSet datosFiltros = new DataSet();
+                cn.Open();
+
+                using (SqlCommand cmdConsulta = new SqlCommand("decasa_admin.FiltrarOfertas", cn))
+                {
+                    cmdConsulta.CommandType = CommandType.StoredProcedure;
+                    cmdConsulta.Parameters.Clear();
+                    cmdConsulta.Parameters.AddWithValue("@pOpcion", opcion);
+                    cmdConsulta.Parameters.AddWithValue("@pTextoBusqueda", texto);
+                    SqlDataAdapter daConsulta = new SqlDataAdapter(cmdConsulta);
+                    daConsulta.Fill(datosFiltros);
+
+                    return datosFiltros;
+                }
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
+        }
+
     }
 }
