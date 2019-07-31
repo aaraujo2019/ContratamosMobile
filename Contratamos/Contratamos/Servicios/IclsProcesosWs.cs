@@ -19,5 +19,7 @@ namespace Contratamos.Servicios
         int GuardarProfesion(string Descripcion);
         void ActualizarProfesion(Profesiones profesiones);
         DataSet FiltrarOferta(int opcion, string texto);
+        Usuarios ConsultarusuarioPorID(int pIdUsuario);
+        List<Aplicaciones> CargarAplcaciones();
     }
 }

@@ -11,5 +11,6 @@
         public int IdTipoUsuario { set; get; }
         public byte[] ArchivoCv { set; get; }
         public string Celular { set; get; }
+        public string Observaciones { set; get; }
     }
 }

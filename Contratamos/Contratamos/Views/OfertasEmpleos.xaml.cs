@@ -273,6 +273,31 @@ namespace Contratamos.Views
                     cmbProfesiones.SelectedIndex = objOferta.IdProfesion;
                     txtDetalleOferta.Text = objOferta.DescripcionOferta;
                     swEstadoOferta.IsToggled = objOferta.IdEstado == 1 ? true : false;
+
+                    if (modGeneral.clsUsuario.IdUsuario != objOferta.IdUsuario)
+                    {
+                        btnGuardar.IsEnabled = false;
+                        btnAplicar.IsEnabled = false;
+                        txtTitulo.IsEnabled = false;
+                        fechaInicio.IsEnabled = false;
+                        fechaFin.IsEnabled = false;
+                        txtSalario.IsEnabled = false;
+                        cmbProfesiones.IsEnabled = false;
+                        txtDetalleOferta.IsEnabled = false;
+                        swEstadoOferta.IsEnabled = false;
+                    }
+                    else
+                    {
+                        btnGuardar.IsEnabled = true;
+                        btnAplicar.IsEnabled = true;
+                        txtTitulo.IsEnabled = true;
+                        fechaInicio.IsEnabled = true;
+                        fechaFin.IsEnabled = true;
+                        txtSalario.IsEnabled = true;
+                        cmbProfesiones.IsEnabled = true;
+                        txtDetalleOferta.IsEnabled = true;
+                        swEstadoOferta.IsEnabled = true;
+                    }
                 }
             }
         }
@@ -283,6 +308,9 @@ namespace Contratamos.Views
             {
                 clsPrincipal.GuardarAplicacion(idOferta, modGeneral.clsUsuario.IdUsuario, CrossDeviceInfo.Current.Id);
                 App.Current.MainPage.DisplayAlert("Contratámos", string.Concat("Usted ha aplicado para: ", objOferta.Titulo), "Ok");
+
+                EnvioCorreo.EnviarCorreo(string.Concat("Aplicación: ", objOferta.Titulo), string.Concat("El usuario, ", modGeneral.clsUsuario.Nombre, " ", modGeneral.clsUsuario.Apellido, ", ha aplicado a la oferta: ", objOferta.Titulo)
+                                                        , modGeneral.clsUsuario.Email);
 
                 MasterDetailPage = null;
                 MasterDetailPage = new MasterDetailPage

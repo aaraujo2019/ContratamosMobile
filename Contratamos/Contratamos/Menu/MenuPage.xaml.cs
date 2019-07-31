@@ -21,6 +21,7 @@ namespace Contratamos.Menu
                 Padding = Device.Idiom == TargetIdiom.Tablet ? new Thickness(30, 50, 20, 20) : new Thickness(30, 70, 20, 20),
                 Children = {
                     new MainLink("Inicio", 3),
+                    new MainLink("Aplicaciones", 8),
                     ((modGeneral.clsUsuario != null) && (modGeneral.clsUsuario.IdTipoUsuario == 2 || modGeneral.clsUsuario.IdTipoUsuario == 1)) ? 
                         new MainLink("Crear Oferta", 4):
                         new MainLink("Ver Oferta", 6),

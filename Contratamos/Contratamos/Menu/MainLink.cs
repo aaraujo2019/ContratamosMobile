@@ -30,6 +30,17 @@ namespace Contratamos.Menu
         {
             switch (opcion)
             {
+                case 8:
+                    MasterDetailPage = null;
+                    MasterDetailPage = new MasterDetailPage
+                    {
+                        Master = new MenuPage(),
+                        Detail = new NavigationPage(new AplcacionesUsuarios()),
+                    };
+
+                    App.Current.MainPage = MasterDetailPage;
+                    break;
+
                 case 7:
 
                     AlertDialog.Builder dialog = new AlertDialog.Builder(clsConfiguracion.mContext);

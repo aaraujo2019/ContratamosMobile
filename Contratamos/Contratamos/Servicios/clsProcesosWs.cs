@@ -73,5 +73,15 @@ namespace Contratamos.Servicios
         {
             return objProcesosWs.FiltrarOferta(opcion, texto);
         }
+
+        public Usuarios ConsultarusuarioPorID(int pIdUsuario)
+        {
+            return objProcesosWs.ConsultarusuarioPorID(pIdUsuario);
+        }
+
+        public List<Aplicaciones> CargarAplcaciones()
+        {
+            return objProcesosWs.CargarAplcaciones();
+        }
     }
 }

@@ -161,5 +161,32 @@ namespace Contratamos.Droid
             }
         }
 
+
+        public Usuarios ConsultarusuarioPorID(int pIdUsuario)
+        {
+            try
+            {
+                return Conexion.BaseDatos.ConsultarusuarioPorID(pIdUsuario);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<Aplicaciones> CargarAplcaciones()
+        {
+            try
+            {
+                return Conexion.BaseDatos.CargarAplcaciones();
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

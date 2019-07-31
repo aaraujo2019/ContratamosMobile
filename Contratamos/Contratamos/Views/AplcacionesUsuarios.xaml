@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Contratamos.Views.AplcacionesUsuarios">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="mnuRegresar" Order="Primary" Text="Regresar" Priority="1" Clicked="MnuRegresar_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <Frame CornerRadius="3" Margin="5,5,5,5" OutlineColor="Black" HasShadow="True">
+
+            <Grid x:Name="grdControles">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout x:Name="stMensaje" Grid.Row="0" Margin="0,20,0,10"/>
+
+                <Grid x:Name="grdTomaInformacion" Grid.Row="1" HorizontalOptions="Center">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="230"/>
+                        <ColumnDefinition Width="80"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Aplicaciones" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                        <Label.FontSize>
+                            <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                        </Label.FontSize>
+                    </Label>
+
+                    <StackLayout  x:Name="pnlPlantillas" BackgroundColor="#f2f2f2" 
+                                  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" 
+                                  HorizontalOptions="Center" Grid.RowSpan="2"
+                                  HeightRequest="600"/>
+
+                </Grid>
+            </Grid>
+
+        </Frame>
+    </ScrollView>
+
+</ContentPage>

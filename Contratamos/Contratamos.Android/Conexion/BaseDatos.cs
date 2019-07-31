@@ -107,6 +107,50 @@ namespace Contratamos.Droid.Conexion
         }
 
 
+        public static Usuarios ConsultarusuarioPorID(int pIdUsuario)
+        {
+            Usuarios usuarios = new Usuarios();
+            try
+            {
+                SqlParameter[] param =
+                {
+                    new SqlParameter("@pIdUsuario", SqlDbType.VarChar, 10) 
+                };
+
+                param[0].Value = pIdUsuario;
+
+                DataSet datosFiltros = new DataSet();
+                datosFiltros = ValidarUsuarioLogin("decasa_admin.ConsultarusuarioPorID", param);
+
+                if (datosFiltros.Tables[0].Rows.Count > 0)
+                {
+                    byte[] archivoByte = new byte[datosFiltros.Tables[0].Rows[0][7].ToString() == string.Empty ? 0 : datosFiltros.Tables[0].Rows[0][7].ToString().Length];
+                    usuarios.Usuario = datosFiltros.Tables[0].Rows[0][3].ToString();
+                    usuarios.Nombre = datosFiltros.Tables[0].Rows[0][1].ToString();
+                    usuarios.Apellido = datosFiltros.Tables[0].Rows[0][2].ToString();
+                    usuarios.IdUsuario = Convert.ToInt32(datosFiltros.Tables[0].Rows[0][0].ToString());
+                    usuarios.Email = datosFiltros.Tables[0].Rows[0][5].ToString();
+                    usuarios.IdTipoUsuario = Convert.ToInt32(datosFiltros.Tables[0].Rows[0][6].ToString());
+                    usuarios.ArchivoCv = archivoByte;
+                    usuarios.Contraseña = datosFiltros.Tables[0].Rows[0][4].ToString();
+                    usuarios.Celular = datosFiltros.Tables[0].Rows[0][8].ToString();
+                    usuarios.Observaciones = datosFiltros.Tables[0].Rows[0][9].ToString();
+
+                    return usuarios;
+                }
+                else
+                {
+                    retorno.Add(0, string.Concat("El usuario ", pIdUsuario, " no existe."));
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
         public static List<Profesiones> CargarProfesiones()
         {
             try
@@ -135,6 +179,41 @@ namespace Contratamos.Droid.Conexion
                 return listaProfesiones;
             }
             catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public static List<Aplicaciones> CargarAplcaciones()
+        {
+            try
+            {
+                SqlConnection cn = getConnection();
+                DataSet datosFiltros = new DataSet();
+                List<Aplicaciones> listaAplcaciones = new List<Aplicaciones>();
+                cn.Open();
+
+                using (SqlCommand cmdConsulta = new SqlCommand("[decasa_admin].[AplicacionesUsuarios]", cn))
+                {
+                    cmdConsulta.CommandType = CommandType.StoredProcedure;
+                    SqlDataAdapter daConsulta = new SqlDataAdapter(cmdConsulta);
+                    daConsulta.Fill(datosFiltros);
+
+                    foreach (DataRow dr in datosFiltros.Tables[0].Rows)
+                    {
+                        listaAplcaciones.Add(new Aplicaciones
+                        {
+                            Titulo = dr["Titulo"].ToString(),
+                            NombreUsuario = dr["NombreUsuario"].ToString(),
+                            FechaAplicación = Convert.ToDateTime(dr["FechaAplicacion"]).ToShortDateString(),
+                            IdUsuario = Convert.ToInt32(dr["IdUsuario"])
+                        });
+                    }
+                }
+
+                return listaAplcaciones;
+            }
+            catch (Exception ex)
             {
                 return null;
             }
@@ -242,6 +321,7 @@ namespace Contratamos.Droid.Conexion
                     cmdConsulta.Parameters.AddWithValue("@pIdTipoUsuario", usuario.IdTipoUsuario);
                     cmdConsulta.Parameters.AddWithValue("@pArchivoCv", archivoByte);
                     cmdConsulta.Parameters.AddWithValue("@pCelular", usuario.Celular);
+                    cmdConsulta.Parameters.AddWithValue("@pObservaciones", usuario.Observaciones);
                     cmdConsulta.ExecuteNonQuery();
                 }
             }
@@ -272,6 +352,7 @@ namespace Contratamos.Droid.Conexion
                     cmdConsulta.Parameters.AddWithValue("@pArchivoCv", archivoByte);
                     cmdConsulta.Parameters.AddWithValue("@pIdUsuario", usuario.IdUsuario);
                     cmdConsulta.Parameters.AddWithValue("@pCelular", usuario.Celular);
+                    cmdConsulta.Parameters.AddWithValue("@pObservaciones", usuario.Observaciones);
                     cmdConsulta.ExecuteNonQuery();
                 }
             }

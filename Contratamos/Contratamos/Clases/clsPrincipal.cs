@@ -1,4 +1,5 @@
 ﻿using Contratamos.Models;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Contratamos.Clases
@@ -58,6 +59,16 @@ namespace Contratamos.Clases
         public DataSet FiltrarOferta(int opcion, string texto)
         {
             return App.objWSProcesos.FiltrarOferta(opcion, texto);
+        }
+
+        public Usuarios ConsultarusuarioPorID(int pIdUsuario)
+        {
+            return App.objWSProcesos.ConsultarusuarioPorID(pIdUsuario);
+        }
+
+        public List<Aplicaciones> CargarAplcaciones()
+        {
+            return App.objWSProcesos.CargarAplcaciones();
         }
     }
 }

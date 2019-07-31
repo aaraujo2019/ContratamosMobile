@@ -1,6 +1,7 @@
 ﻿using Contratamos.Clases;
 using Contratamos.Generales;
 using Contratamos.Menu;
+using Contratamos.Models;
 using Contratamos.ViewModel;
 using System;
 using System.IO;
@@ -16,6 +17,7 @@ namespace Contratamos.Views
         public vUsuarioViewModel vUsuarioViewModel { get => vusuarioViewModel; set => vusuarioViewModel = value; }
         public modGeneral modGeneral = new modGeneral();
         private MasterDetailPage MasterDetailPage;
+        private clsPrincipal clsPrincipal = new clsPrincipal();
 
         public vUsuarios()
         {
@@ -28,6 +30,32 @@ namespace Contratamos.Views
                 cmbTipoUsuario.SelectedIndex = modGeneral.clsUsuario.IdTipoUsuario;
                 vUsuarioViewModel.Verificar = modGeneral.clsUsuario.Contraseña;
             }
+        }
+
+        public vUsuarios(Aplicaciones aplcaciones)
+        {
+            InitializeComponent();
+
+            Usuarios usuarioSlec = clsPrincipal.ConsultarusuarioPorID(aplcaciones.IdUsuario);
+           
+            BindingContext = vUsuarioViewModel = new vUsuarioViewModel();
+            vUsuarioViewModel.Navigation = this.Navigation;
+
+            vUsuarioViewModel.User = usuarioSlec;
+
+            if (vUsuarioViewModel.User != null)
+            {
+                cmbTipoUsuario.SelectedIndex = vUsuarioViewModel.User.IdTipoUsuario;
+                vUsuarioViewModel.Verificar = vUsuarioViewModel.User.Contraseña;
+            }
+
+            if (modGeneral.clsUsuario != null)
+            {
+                if (modGeneral.clsUsuario.IdUsuario == vUsuarioViewModel.User.IdUsuario)
+                    HabilitarControles();
+                else InhabilitarControles();
+            }
+            else InhabilitarControles();
         }
 
         public async void OpenFolderDialogAsync()
@@ -76,6 +104,32 @@ namespace Contratamos.Views
             txtUsuario.Text = string.Empty;
             cmbTipoUsuario.SelectedIndex = -1;
             txtCeluar.Text = string.Empty;
+        }
+
+        private void InhabilitarControles()
+        {
+            txtNombre.IsEnabled = false;
+            txtApellido.IsEnabled = false;
+            txtContrasena.IsEnabled = false;
+            txtEmail.IsEnabled = false;
+            txtRuta.IsEnabled = false;
+            txtUsuario.IsEnabled = false;
+            cmbTipoUsuario.IsEnabled = false;
+            txtCeluar.IsEnabled = false;
+        }
+
+        private void HabilitarControles()
+        {
+            txtNombre.IsEnabled = true;
+            txtApellido.IsEnabled = true;
+            txtContrasena.IsEnabled = true;
+            txtEmail.IsEnabled = true;
+            txtRuta.IsEnabled = true;
+            txtUsuario.IsEnabled = true;
+            cmbTipoUsuario.IsEnabled = true;
+            txtCeluar.IsEnabled = true;
+            txtObservaciones.IsEnabled = true;
+            btnGuardar.IsEnabled = true;
         }
 
         private void BtnBuscar_Clicked(object sender, EventArgs e)
