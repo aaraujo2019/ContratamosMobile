@@ -14,7 +14,7 @@ namespace Contratamos.Droid.Conexion
         public static Usuarios ValidarUsuarioConexionAcceso(string pUsuario, string pClave)
         {
             bool estadoSesion = false;
-            Models.Usuarios usuarios = new Models.Usuarios();
+            Usuarios usuarios = new Usuarios();
             try
             {
                 SqlParameter[] param =
@@ -36,11 +36,12 @@ namespace Contratamos.Droid.Conexion
                     usuarios.Usuario = datosFiltros.Tables[0].Rows[0][3].ToString();
                     usuarios.Nombre = datosFiltros.Tables[0].Rows[0][1].ToString();
                     usuarios.Apellido = datosFiltros.Tables[0].Rows[0][2].ToString();
-                    usuarios.IdUsuario = System.Convert.ToInt32(datosFiltros.Tables[0].Rows[0][0].ToString());
+                    usuarios.IdUsuario = Convert.ToInt32(datosFiltros.Tables[0].Rows[0][0].ToString());
                     usuarios.Email = datosFiltros.Tables[0].Rows[0][5].ToString();
-                    usuarios.IdTipoUsuario = System.Convert.ToInt32(datosFiltros.Tables[0].Rows[0][6].ToString());
+                    usuarios.IdTipoUsuario = Convert.ToInt32(datosFiltros.Tables[0].Rows[0][6].ToString());
                     usuarios.ArchivoCv = archivoByte;
                     usuarios.Contraseña = datosFiltros.Tables[0].Rows[0][4].ToString();
+                    usuarios.Celular = datosFiltros.Tables[0].Rows[0][8].ToString();
 
                     return usuarios;
                 }
@@ -50,9 +51,9 @@ namespace Contratamos.Droid.Conexion
                     return null;
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw new System.Exception(ex.Message);
+                throw new Exception(ex.Message);
             }
         }
 
@@ -62,9 +63,9 @@ namespace Contratamos.Droid.Conexion
             {
                 return new SqlConnection(cadenaConexion);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw new System.Exception(ex.Message);
+                throw new Exception(ex.Message);
             }
         }
 
@@ -88,9 +89,9 @@ namespace Contratamos.Droid.Conexion
                 new SqlDataAdapter(command).Fill(ds);
                 return ds;
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw new System.Exception(ex.Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -106,13 +107,13 @@ namespace Contratamos.Droid.Conexion
         }
 
 
-        public static List<Models.Profesiones> CargarProfesiones()
+        public static List<Profesiones> CargarProfesiones()
         {
             try
             {
                 SqlConnection cn = getConnection();
                 DataSet datosFiltros = new DataSet();
-                List<Models.Profesiones> listaProfesiones = new List<Models.Profesiones>();
+                List<Profesiones> listaProfesiones = new List<Profesiones>();
                 cn.Open();
 
                 using (SqlCommand cmdConsulta = new SqlCommand("select * from [decasa_admin].[Profesiones]", cn))
@@ -121,7 +122,7 @@ namespace Contratamos.Droid.Conexion
                     {
                         while (reader.Read())
                         {
-                            Models.Profesiones profesion = new Models.Profesiones()
+                            Profesiones profesion = new Profesiones()
                             {
                                 IdProfesion = reader.GetInt32(0),
                                 Descripcion = reader.GetString(1)
@@ -133,28 +134,28 @@ namespace Contratamos.Droid.Conexion
                 }
                 return listaProfesiones;
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return null;
             }
         }
 
-        public static List<Models.TipoUsuario> CargarTipoUsuario()
+        public static List<TipoUsuario> CargarTipoUsuario()
         {
             try
             {
                 SqlConnection cn = getConnection();
                 DataSet datosFiltros = new DataSet();
-                List<Models.TipoUsuario> listaTipoUsuarios = new List<Models.TipoUsuario>();
+                List<TipoUsuario> listaTipoUsuarios = new List<TipoUsuario>();
                 cn.Open();
 
-                using (SqlCommand cmdConsulta = new SqlCommand("select * from [decasa_admin].[TipoUsuario]", cn))
+                using (SqlCommand cmdConsulta = new SqlCommand("select * from [decasa_admin].[TipoUsuario] where not Descripcion = 'Administrador'", cn))
                 {
                     using (SqlDataReader reader = cmdConsulta.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Models.TipoUsuario tipoUsuario = new Models.TipoUsuario()
+                            TipoUsuario tipoUsuario = new TipoUsuario()
                             {
                                 IdTipoUsuario = reader.GetInt32(0),
                                 Descripcion = reader.GetString(1)
@@ -166,7 +167,7 @@ namespace Contratamos.Droid.Conexion
                 }
                 return listaTipoUsuarios;
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return null;
             }
@@ -189,7 +190,7 @@ namespace Contratamos.Droid.Conexion
                     return datosFiltros;
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -215,7 +216,7 @@ namespace Contratamos.Droid.Conexion
                     return datosFiltros;
                 }
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return null;
             }
@@ -240,6 +241,7 @@ namespace Contratamos.Droid.Conexion
                     cmdConsulta.Parameters.AddWithValue("@pEmail", usuario.Email);
                     cmdConsulta.Parameters.AddWithValue("@pIdTipoUsuario", usuario.IdTipoUsuario);
                     cmdConsulta.Parameters.AddWithValue("@pArchivoCv", archivoByte);
+                    cmdConsulta.Parameters.AddWithValue("@pCelular", usuario.Celular);
                     cmdConsulta.ExecuteNonQuery();
                 }
             }
@@ -269,6 +271,7 @@ namespace Contratamos.Droid.Conexion
                     cmdConsulta.Parameters.AddWithValue("@pIdTipoUsuario", usuario.IdTipoUsuario);
                     cmdConsulta.Parameters.AddWithValue("@pArchivoCv", archivoByte);
                     cmdConsulta.Parameters.AddWithValue("@pIdUsuario", usuario.IdUsuario);
+                    cmdConsulta.Parameters.AddWithValue("@pCelular", usuario.Celular);
                     cmdConsulta.ExecuteNonQuery();
                 }
             }

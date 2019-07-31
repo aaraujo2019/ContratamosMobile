@@ -44,6 +44,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <Label Grid.Column="0" Grid.Row="0" Text="Nombres" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
@@ -140,7 +141,7 @@
 
                             <Entry Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" x:Name="txtVarifCont" TextColor="Black" Placeholder="Verificar Contraseña"
                                PlaceholderColor="Silver" HorizontalTextAlignment="Start" VerticalOptions="Center" WidthRequest="200" IsPassword="True"
-                                   Text="{Binding Message, Mode=TwoWay}">
+                                   Text="{Binding Verificar, Mode=TwoWay}">
                                 <Entry.Behaviors>
                                     <local:PasswordValidatorBehavior/>
                                 </Entry.Behaviors>
@@ -195,33 +196,53 @@
                                 </Picker.FontSize>
                             </Picker>
 
-
                             <!--+++++++++++++++++++++++++-->
 
                             <Entry Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="3" x:Name="txtRuta" TextColor="Black" PlaceholderColor="Silver" 
-                           HorizontalTextAlignment="Start" VerticalOptions="Center" WidthRequest="150" Placeholder="HV/CV .PDF" IsEnabled="False">
+                                HorizontalTextAlignment="Start" VerticalOptions="Center" WidthRequest="150" Placeholder="HV/CV .PDF" IsEnabled="False">
                                 <Entry.FontSize>
                                     <OnIdiom x:TypeArguments="x:Double"                     
                                Phone="15"                  
                                Tablet="25"/>
                                 </Entry.FontSize>
                             </Entry>
-
+                            
                             <StackLayout Grid.Column="2" Grid.Row="7" HorizontalOptions="Center" Margin="0,0,0,0">
                                 <Button Text="..." BackgroundColor="#0072BD" Margin="1,10,0,1" x:Name="btnBuscar"
                             TextColor="White" FontSize="18" Clicked="BtnBuscar_Clicked" />
                             </StackLayout>
 
+                            
+
+                            <Label Grid.Column="0" Grid.Row="8" Text="Número Celular" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Label.FontSize>
+                            </Label>
+
+                            <Entry Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" x:Name="txtCeluar" TextColor="Black" Placeholder="Celular" MaxLength="10"
+                               PlaceholderColor="Silver" HorizontalTextAlignment="Start" VerticalOptions="Center" WidthRequest="200" Keyboard="Numeric"
+                                   Text="{Binding User.Celular, Mode=TwoWay}">
+                                <Entry.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                                   Phone="15"                  
+                                   Tablet="25"/>
+                                </Entry.FontSize>
+                            </Entry>
+
+
                             <!--++++++++++++++++++++++++++++++++-->
 
 
 
-                            <StackLayout Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" Margin="0,0,0,0">
+                            <StackLayout Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" Margin="0,0,0,0">
                                 <Button Text="Guardar" BackgroundColor="#0072BD" Margin="2,30,2,10"
                             TextColor="White" FontSize="18" Command="{Binding GuardarCommand}"/>
                             </StackLayout>
 
-                            <StackLayout Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" Margin="0,0,0,0">
+                            <StackLayout Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" Margin="0,0,0,0">
                                 <Button Text="Nuevo" BackgroundColor="#0072BD" Margin="2,30,2,10"
                             TextColor="White" FontSize="18" Clicked="Button_Clicked"/>
                             </StackLayout>

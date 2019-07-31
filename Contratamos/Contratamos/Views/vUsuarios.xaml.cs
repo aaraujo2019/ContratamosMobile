@@ -24,7 +24,10 @@ namespace Contratamos.Views
             vUsuarioViewModel.Navigation = this.Navigation;
 
             if (modGeneral.clsUsuario != null)
+            {
                 cmbTipoUsuario.SelectedIndex = modGeneral.clsUsuario.IdTipoUsuario;
+                vUsuarioViewModel.Verificar = modGeneral.clsUsuario.Contraseña;
+            }
         }
 
         public async void OpenFolderDialogAsync()
@@ -72,6 +75,7 @@ namespace Contratamos.Views
             txtRuta.Text = string.Empty;
             txtUsuario.Text = string.Empty;
             cmbTipoUsuario.SelectedIndex = -1;
+            txtCeluar.Text = string.Empty;
         }
 
         private void BtnBuscar_Clicked(object sender, EventArgs e)

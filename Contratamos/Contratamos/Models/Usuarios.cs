@@ -10,5 +10,6 @@
         public string Email { set; get; }
         public int IdTipoUsuario { set; get; }
         public byte[] ArchivoCv { set; get; }
+        public string Celular { set; get; }
     }
 }
