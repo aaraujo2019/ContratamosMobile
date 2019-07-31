@@ -323,7 +323,7 @@ namespace Contratamos.Views
             }
             catch (Exception)
             {
-                App.Current.MainPage.DisplayAlert("Contratámos", "Ha ocurrido un problema. Switch_Toggled", "Ok");
+                App.Current.MainPage.DisplayAlert("Contratámos", "Ha ocurrido un problema. ", "Ok");
             }
         }
 

@@ -15,14 +15,14 @@ namespace Contratamos.Clases
             string hostMail = "smtp.live.com";
             int puertoHostMail = 25;
             string credentialMailUser = "alvaro.araujo.arrieta@hotmail.com";
-            string credentialMailPwd = "A1042418697";
+            string credentialMailPwd = "ing4lv4r01042418697";
 
             //Nota: La propiedad To es una colección que permite enviar el mensaje a más de un destinatario
             //Asunto
             mmsg.To.Add(strParamDestinatarios);
             string strMensaje = "<HR SIZE=5 color=#0000ff NOSHADE> </BR><P><P><b>";
             strMensaje += strParamMensaje;
-            strMensaje += "</b></BR><P><P><HR SIZE=5 color=#0000ff NOSHADE> <P><b>NOTA: </b>Favor no responder, este mensaje es generado automáticamente por contabilidad de la FECP.";
+            strMensaje += "</b></BR><P><P><HR SIZE=5 color=#0000ff NOSHADE> <P><b>NOTA: </b>Favor no responder, este mensaje es generado automáticamente por Contratámos.";
 
             mmsg.Subject = strParamAsunto;
             mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
@@ -51,7 +51,7 @@ namespace Contratamos.Clases
                 cliente.Send(mmsg);
                 return "Mensajes enviados con exito.";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -65,7 +65,7 @@ namespace Contratamos.Clases
             string hostMail = "smtp.live.com";
             int puertoHostMail = 25;
             string credentialMailUser = "alvaro.araujo.arrieta@hotmail.com";
-            string credentialMailPwd = "A1042418697";
+            string credentialMailPwd = "ing4lv4r01042418697";
 
             //Nota: La propiedad To es una colección que permite enviar el mensaje a más de un destinatario
             //Asunto
