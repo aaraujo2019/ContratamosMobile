@@ -21,5 +21,6 @@ namespace Contratamos.Servicios
         DataSet FiltrarOferta(int opcion, string texto);
         Usuarios ConsultarusuarioPorID(int pIdUsuario);
         List<Aplicaciones> CargarAplcaciones();
+        List<Ciudades> CargarCiudades();
     }
 }

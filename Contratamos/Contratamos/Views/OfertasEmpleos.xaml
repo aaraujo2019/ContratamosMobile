@@ -46,6 +46,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <Label Grid.Column="0" Grid.Row="0" Text="Título" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
@@ -83,7 +84,6 @@
                                Tablet="25"/>
                                 </Picker.FontSize>
                             </Picker>
-
 
                             <Label Grid.Column="0" Grid.Row="2" Text="Fecha Inicio" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
                                 <Label.FontSize>
@@ -144,6 +144,7 @@
                                Tablet="25"/>
                                 </Label.FontSize>
                             </Label>
+                           
 
                             <Grid Grid.Column="1" Grid.Row="5">
 
@@ -162,9 +163,8 @@
                                     </Label.FontSize>
                                 </Label>
                             </Grid>
-                           
 
-                            <Label Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Text="Detalles de la oferta" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                            <Label Grid.Column="0" Grid.Row="7" Text="Ciudades" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
                                 <Label.FontSize>
                                     <OnIdiom x:TypeArguments="x:Double"                     
                                Phone="15"                  
@@ -172,7 +172,28 @@
                                 </Label.FontSize>
                             </Label>
 
-                            <Editor Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="3" BackgroundColor="#c2c8d1" HeightRequest="250" 
+
+                            <Picker Title="Seleccione ..." ItemsSource="{Binding ListaCiudades}" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" 
+                            ItemDisplayBinding="{Binding NombreCiudad}" SelectedItem="{Binding SelectedCiudad}"
+                                    x:Name="cmbCiudades">
+                                <Picker.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Picker.FontSize>
+                            </Picker>
+
+
+
+                            <Label Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" Text="Detalles de la oferta" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double"                     
+                               Phone="15"                  
+                               Tablet="25"/>
+                                </Label.FontSize>
+                            </Label>
+
+                            <Editor Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="3" BackgroundColor="#c2c8d1" HeightRequest="250" 
                                     WidthRequest="450" x:Name="txtDetalleOferta">
                                 <Editor.FontSize>
                                     <OnIdiom x:TypeArguments="x:Double"                     
@@ -181,28 +202,28 @@
                                 </Editor.FontSize>
                             </Editor>
 
-                            <StackLayout x:Name="btnGuardar" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" HorizontalOptions="Center" Margin="0,0,0,0">
+                            <StackLayout x:Name="btnGuardar" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" HorizontalOptions="Center" Margin="0,0,0,0">
                                 <Button Text="Guardar" BackgroundColor="#0072BD" Margin="2,30,2,10"
                             TextColor="White" FontSize="18" Clicked="btnGuardar_Clicked"/>
                             </StackLayout>
 
-                            <StackLayout x:Name="btnAplicar" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" HorizontalOptions="Center" Margin="0,0,0,0">
+                            <StackLayout x:Name="btnAplicar" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" HorizontalOptions="Center" Margin="0,0,0,0">
                                 <Button Text="Aplicar" BackgroundColor="#0072BD" Margin="2,30,2,10"
                             TextColor="White" FontSize="18" Clicked="btnAplicar_Clicked"/>
                             </StackLayout>
 
-                            <StackLayout x:Name="btnNuevo" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" HorizontalOptions="Center" Margin="0,0,0,0">
+                            <StackLayout x:Name="btnNuevo" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" HorizontalOptions="Center" Margin="0,0,0,0">
                                 <Button Text="Nuevo" BackgroundColor="#0072BD" Margin="2,30,2,10"
                             TextColor="White" FontSize="18" Clicked="btnNuevo_Clicked"/>
                             </StackLayout>
 
-                            <StackLayout x:Name="btnBuscar" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2"  
+                            <StackLayout x:Name="btnBuscar" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2"  
                                          HorizontalOptions="Center" Margin="0,0,0,0">
                                 <Button Text="Buscar" BackgroundColor="#0072BD" Margin="2,30,2,10"
                             TextColor="White" FontSize="18" Clicked="btnBuscar_Clicked"/>
                             </StackLayout>
 
-                            <Entry Grid.Column="0" Grid.Row="9" x:Name="txtBuscar" TextColor="Black" Placeholder="Id Oferta..."
+                            <Entry Grid.Column="0" Grid.Row="10" x:Name="txtBuscar" TextColor="Black" Placeholder="Id Oferta..."
                                PlaceholderColor="Silver" HorizontalTextAlignment="Center" VerticalOptions="Center" 
                                    WidthRequest="100" Keyboard="Numeric">
                                 <Entry.FontSize>

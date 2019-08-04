@@ -172,7 +172,9 @@ namespace Contratamos.Menu
                 case 1:
 
                     if (modGeneral.clsUsuario != null)
+                    {
                         App.Current.MainPage = new NavigationPage(new vUsuarios());
+                    }
                     else
                     {
                         MasterDetailPage = null;

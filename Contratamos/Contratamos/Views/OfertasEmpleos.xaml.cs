@@ -70,6 +70,9 @@ namespace Contratamos.Views
             swEstadoOferta.IsToggled = ofertaSelecc.IdEstado == 1 ? true : false;
             swEstadoOferta.IsEnabled = false;
 
+            cmbCiudades.SelectedIndex = ofertaSelecc.IdCiudad - 1;
+            cmbCiudades.IsEnabled = false;
+
             txtBuscar.IsVisible = false;
             btnBuscar.IsVisible = false;
 
@@ -131,6 +134,14 @@ namespace Contratamos.Views
                 objOferta.IdUsuario = modGeneral.clsUsuario.IdUsuario;
                 objOferta.IdEstado = swEstadoOferta.IsToggled == true ? 1 : 2;
                 objOferta.IdDispositivo = CrossDeviceInfo.Current.Id;
+
+                if (cmbCiudades.SelectedIndex == -1)
+                {
+                    App.Current.MainPage.DisplayAlert("Contratámos", "Debe seleccionar una ciudad para la Oferta.", "Ok");
+                    cmbProfesiones.Focus();
+                    return;
+                }
+                else objOferta.IdCiudad = cmbCiudades.SelectedIndex;
 
                 if (modGeneral.clsUsuario != null && (modGeneral.clsUsuario.IdTipoUsuario == 1 || modGeneral.clsUsuario.IdTipoUsuario == 2))
                 {
@@ -194,11 +205,20 @@ namespace Contratamos.Views
                 objOferta.IdEstado = swEstadoOferta.IsToggled == true ? 1 : 2;
                 objOferta.IdDispositivo = CrossDeviceInfo.Current.Id;
 
+                if (cmbCiudades.SelectedIndex == -1)
+                {
+                    App.Current.MainPage.DisplayAlert("Contratámos", "Debe seleccionar una ciudad para la Oferta.", "Ok");
+                    cmbProfesiones.Focus();
+                    return;
+                }
+                else objOferta.IdCiudad = cmbCiudades.SelectedIndex;
+
                 clsPrincipal.ActualizarOferta(objOferta);
                 App.Current.MainPage.DisplayAlert("Contratámos", "La Oferta fue actualizada con exito.", "Ok");
             }
             
             btnNuevo_Clicked(null, null);
+            MnuRegresar_Clicked(null, null);
         }
 
         private void btnNuevo_Clicked(object sender, EventArgs e)
@@ -208,6 +228,8 @@ namespace Contratamos.Views
             txtTitulo.IsEnabled = true;
             cmbProfesiones.SelectedIndex = -1;
             cmbProfesiones.IsEnabled = true;
+            cmbCiudades.SelectedIndex = -1;
+            cmbCiudades.IsEnabled = true;
             fechaInicio.Date = DateTime.Now;
             fechaInicio.IsEnabled = true;
             fechaFin.Date = fechaInicio.Date;
@@ -265,6 +287,7 @@ namespace Contratamos.Views
                     objOferta.IdEstado = Convert.ToInt32(dr["IdEstado"]);
                     objOferta.IdProfesion = Convert.ToInt32(dr["IdProfesion"]);
                     objOferta.IdEstado = Convert.ToInt32(dr["IdEstado"]);
+                    objOferta.IdCiudad = Convert.ToInt32(dr["IdCiudad"]);
 
                     txtTitulo.Text = objOferta.Titulo;
                     fechaInicio.Date = objOferta.OfertaDesde;
@@ -283,6 +306,7 @@ namespace Contratamos.Views
                         fechaFin.IsEnabled = false;
                         txtSalario.IsEnabled = false;
                         cmbProfesiones.IsEnabled = false;
+                        cmbCiudades.IsEnabled = false;
                         txtDetalleOferta.IsEnabled = false;
                         swEstadoOferta.IsEnabled = false;
                     }
@@ -295,6 +319,7 @@ namespace Contratamos.Views
                         fechaFin.IsEnabled = true;
                         txtSalario.IsEnabled = true;
                         cmbProfesiones.IsEnabled = true;
+                        cmbCiudades.IsEnabled = true;
                         txtDetalleOferta.IsEnabled = true;
                         swEstadoOferta.IsEnabled = true;
                     }

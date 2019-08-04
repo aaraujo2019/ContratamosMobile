@@ -48,7 +48,9 @@ namespace Contratamos.Views
                     IdUsuario = Convert.ToInt32(dr["IdUsuario"]),
                     IdDispositivo = dr["IdDispositivo"].ToString(),
                     IdEstado = Convert.ToInt32(dr["IdEstado"]),
-                    IdProfesion = Convert.ToInt32(dr["IdProfesion"])
+                    IdProfesion = Convert.ToInt32(dr["IdProfesion"]),
+                    IdCiudad = Convert.ToInt32(dr["IdCiudad"]),
+                    NombreCiudad = dr["NombreCiudad"].ToString()
                 });
             }
 
@@ -107,7 +109,7 @@ namespace Contratamos.Views
                 List<KeyValuePair<int, string>> listaElementos = new List<KeyValuePair<int, string>>();
                 foreach (var item in listaOferta)
                 {
-                    listaElementos.Add(new KeyValuePair<int, string>(item.IdOferta, item.Titulo));
+                    listaElementos.Add(new KeyValuePair<int, string>(item.IdOferta, string.Concat(item.Titulo, " - ", item.NombreCiudad, ".")));
                 }
 
                 ListView listView = new ListView { ItemsSource = listaElementos };

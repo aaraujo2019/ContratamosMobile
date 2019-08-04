@@ -14,5 +14,7 @@ namespace Contratamos.Models
         public  int IdUsuario { set; get; }
         public  int IdEstado { set; get; }
         public  string IdDispositivo { set; get; }
+        public  int IdCiudad { set; get; }
+        public  string NombreCiudad { set; get; }
     }
 }

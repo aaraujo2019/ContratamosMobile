@@ -20,6 +20,7 @@ namespace Contratamos.ViewModel
 
         private clsPrincipal clsPrincipal = new clsPrincipal();
         private MasterDetailPage MasterDetailPage;
+        private vUsuarios vUsuario;
 
         private Usuarios _user = new Usuarios();
         public Usuarios User
@@ -155,6 +156,14 @@ namespace Contratamos.ViewModel
                 clsPrincipal.GuardarUsuario(User);
                 App.Current.MainPage.DisplayAlert("Contratámos", "El usuario se ha ingresado con exito.", "Ok");
             }
+
+            if (!User.Observaciones.Contains(vUsuario.wObservaciones))
+            {
+                User.Observaciones = string.Empty;
+                User.Observaciones = string.Concat(User.Observaciones, "\n", vUsuario.wObservaciones);
+            }
+            else User.Observaciones = string.Concat(User.Observaciones, "-", User.Usuario);
+
 
             await Navigation.PushPopupAsync(new UserAnimationPage());
             MasterDetailPage = new MasterDetailPage

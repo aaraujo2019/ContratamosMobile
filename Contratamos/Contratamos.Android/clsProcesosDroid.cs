@@ -188,5 +188,18 @@ namespace Contratamos.Droid
             }
         }
 
+        public List<Ciudades> CargarCiudades()
+        {
+            try
+            {
+                return Conexion.BaseDatos.CargarCiudades();
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

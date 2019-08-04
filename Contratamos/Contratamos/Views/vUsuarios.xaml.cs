@@ -18,6 +18,7 @@ namespace Contratamos.Views
         public modGeneral modGeneral = new modGeneral();
         private MasterDetailPage MasterDetailPage;
         private clsPrincipal clsPrincipal = new clsPrincipal();
+        public string wObservaciones = string.Empty;
 
         public vUsuarios()
         {
@@ -47,6 +48,7 @@ namespace Contratamos.Views
             {
                 cmbTipoUsuario.SelectedIndex = vUsuarioViewModel.User.IdTipoUsuario;
                 vUsuarioViewModel.Verificar = vUsuarioViewModel.User.Contraseña;
+                wObservaciones = vUsuarioViewModel.User.Observaciones;
             }
 
             if (modGeneral.clsUsuario != null)

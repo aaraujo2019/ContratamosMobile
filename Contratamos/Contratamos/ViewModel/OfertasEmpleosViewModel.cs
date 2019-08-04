@@ -18,6 +18,7 @@ namespace Contratamos.ViewModel
         }
 
         public List<Profesiones> ListaDeProfesiones { set; get; }
+        public List<Ciudades> ListaCiudades { set; get; }
 
         private Profesiones _selectedProfesion;
         public Profesiones SelectedProfesion
@@ -44,9 +45,35 @@ namespace Contratamos.ViewModel
             }
         }
 
+        private Ciudades _selectedCiudad;
+        public Ciudades SelectedCiudad
+        {
+            get
+            {
+                return _selectedCiudad;
+            }
+            set
+            {
+                SetProperty(ref _selectedCiudad, value);
+            }
+        }
+        private string _ciudadText;
+        public string CiudadText
+        {
+            get
+            {
+                return _ciudadText;
+            }
+            set
+            {
+                SetProperty(ref _ciudadText, value);
+            }
+        }
+
         public OfertasEmpleosViewModel()
         {
             ListaDeProfesiones = ProfesionServices.ObtenerProfesiones().OrderBy(p => p.IdProfesion).ToList();
+            ListaCiudades = clsCiudadesWs.CargarCiudades().OrderBy(c => c.NombreCiudad).ToList();
         }
     }
 }

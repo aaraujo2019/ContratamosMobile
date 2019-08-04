@@ -83,5 +83,10 @@ namespace Contratamos.Servicios
         {
             return objProcesosWs.CargarAplcaciones();
         }
+
+        public List<Ciudades> CargarCiudades()
+        {
+            return objProcesosWs.CargarCiudades();
+        }
     }
 }

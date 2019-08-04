@@ -184,6 +184,39 @@ namespace Contratamos.Droid.Conexion
             }
         }
 
+        public static List<Ciudades> CargarCiudades()
+        {
+            try
+            {
+                SqlConnection cn = getConnection();
+                DataSet datosFiltros = new DataSet();
+                List<Ciudades> listaCiudades = new List<Ciudades>();
+                cn.Open();
+
+                using (SqlCommand cmdConsulta = new SqlCommand("decasa_admin.CargarCiudades", cn))
+                {
+                    using (SqlDataReader reader = cmdConsulta.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Ciudades ciudad = new Ciudades()
+                            {
+                                IdCiudad = reader.GetInt32(0),
+                                NombreCiudad = reader.GetString(1)
+                            };
+
+                            listaCiudades.Add(ciudad);
+                        }
+                    }
+                }
+                return listaCiudades;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public static List<Aplicaciones> CargarAplcaciones()
         {
             try
@@ -384,6 +417,7 @@ namespace Contratamos.Droid.Conexion
                     cmdConsulta.Parameters.AddWithValue("@pIdUsuario", oferta.IdUsuario);
                     cmdConsulta.Parameters.AddWithValue("@pIdEstado", oferta.IdEstado);
                     cmdConsulta.Parameters.AddWithValue("@pIdDispositivo", oferta.IdDispositivo);
+                    cmdConsulta.Parameters.AddWithValue("@pIdCiudad", oferta.IdCiudad);
                     SqlDataAdapter daConsulta = new SqlDataAdapter(cmdConsulta);
                     daConsulta.Fill(datosFiltros);
 
@@ -443,6 +477,7 @@ namespace Contratamos.Droid.Conexion
                     cmdConsulta.Parameters.AddWithValue("@pIdEstado", oferta.IdEstado);
                     cmdConsulta.Parameters.AddWithValue("@pIdDispositivo", oferta.IdDispositivo);
                     cmdConsulta.Parameters.AddWithValue("@pIdOferta", oferta.IdOferta);
+                    cmdConsulta.Parameters.AddWithValue("@pIdCiudad", oferta.IdCiudad);
                     cmdConsulta.ExecuteNonQuery();
                 }
             }
